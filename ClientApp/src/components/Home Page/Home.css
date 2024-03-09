@@ -1,0 +1,355 @@
+﻿/*================================================== HOME PAGE ==================================================*/
+/*======================================== HOME SECTION ========================================*/
+.home {
+    margin-bottom: 60px;
+    position: relative;
+    display: block;
+}
+
+.home-container {
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.home h1 {
+    font-size: 64px;
+    color: var(--second-color);
+    text-align: left;
+}
+
+.home-img .icons {
+    padding: 0;
+}
+
+    .home-img .icons .icon {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: var(--second-color);
+    }
+
+@media screen and (max-width:1280px) {
+    .home-img .icon span {
+        display: none;
+    }
+
+    .icon img {
+        width: 80px;
+        height: 80px;
+    }
+
+    .icon {
+        width: max-content;
+    }
+}
+
+@media screen and (max-width: 1116px) {
+    .icon img {
+        width: 60px;
+        height: 60px;
+    }
+
+    .home-img .icons {
+        bottom: 60px !important;
+    }
+}
+
+@media screen and (max-width: 1035px) {
+    .icon img {
+        width: 45px;
+        height: 45px;
+    }
+}
+
+@media screen and (min-width:982px) {
+    .home {
+        margin-top: 120px;
+        margin-bottom: 120px;
+    }
+
+    .home-container {
+        max-width: 1240px;
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 9.5%;
+    }
+
+    .home h1 {
+        margin-bottom: 80px;
+    }
+
+    .search-btn .button {
+        width: 420px;
+        font-size: 24px;
+    }
+
+    .home-img {
+        position: absolute;
+        right: 0;
+        bottom: -25px;
+        opacity: 1;
+        max-width: calc(100% - 670px);
+    }
+
+        .home-img:before {
+            position: absolute;
+            top: -15%;
+            bottom: -15%;
+            left: 0;
+            right: 0;
+        }
+
+        .home-img .icons {
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            z-index: 1;
+            white-space: nowrap;
+            letter-spacing: 1.6px;
+            font-size: 16px;
+            font-weight: 600;
+            bottom: 60px;
+            left: 50%;
+            gap: 36px;
+            transform: translate(-50%);
+        }
+}
+
+@media screen and (max-width: 1180px) {
+    .home-container {
+        padding: 0 5%;
+    }
+}
+
+@media screen and (max-width: 1050px) {
+    .home-container {
+        padding: 0 15px;
+    }
+}
+
+@media screen and (max-width: 981.9px) {
+    .home h1 {
+        font-size: 24px;
+        margin-bottom: 10px;
+        padding: 0 15px;
+    }
+
+    .search-btn .cart-btn.button {
+        height: 40px;
+        width: 100%;
+    }
+
+    .search-btn {
+        padding: 0 15px;
+    }
+
+    .home-container {
+        padding: 0;
+    }
+
+    .home-img {
+        margin-bottom: 20px;
+    }
+
+        .home-img .icons {
+            position: absolute;
+            display: flex;
+            justify-content: space-around;
+            z-index: 1;
+            width: 90%;
+            white-space: nowrap;
+            letter-spacing: 1.6px;
+            font-size: 16px;
+            font-weight: 600;
+            bottom: 90px;
+            left: 50%;
+            gap: 36px;
+            transform: translate(-50%);
+        }
+
+    .icon img {
+        width: 100px;
+        height: 100px
+    }
+}
+/*======================================== MERITS SECTION ========================================*/
+.merits-container{
+    margin-bottom: 120px !important;
+}
+.merits-container h2 {
+    color: var(--second-color);
+    margin-bottom: 20px;
+}
+
+.merits {
+    display: flex;
+    gap: 8px;
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.card-home {
+    border-radius: 20px;
+    padding: 15px;
+    position: relative;
+    align-items: center;
+    color: var(--first-color);
+    background-color: var(--second-color);
+    display: flex;
+    gap: 16px;
+    cursor: pointer;
+}
+
+.card-title {
+    display: block;
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.merits .card-home span:first-child {
+    flex: 0 0 60px;
+}
+
+@media screen and (min-width:982px) {
+    .merits-container {
+        max-width: 1240px;
+        margin: 0 auto;
+        padding: 0 10%;
+        box-sizing: content-box;
+    }
+
+        .merits-container h2 {
+            font-size: 40px;
+        }
+}
+
+@media screen and (max-width: 1180px) {
+    .merits-container {
+        padding: 0 5%;
+    }
+}
+
+@media screen and (max-width: 1050px) {
+    .merits-container {
+        padding: 0 15px;
+    }
+}
+
+@media screen and (max-width: 981.9px) {
+    .merits-container {
+        width: 100%;
+        margin-bottom:60px !important;
+    }
+
+        .merits-container h2 {
+            font-size: 20px;
+        }
+
+    .card-home {
+        padding-left: 10px;
+        flex: 0 0 280px;
+    }
+
+    .merits {
+        overflow: auto;
+        scrollbar-width: none;
+    }
+}
+/*======================================== AUTO BRANDS SECTION ========================================*/
+.brands-container h2{
+    color:var(--second-color);
+    font-size:40px;
+    margin-bottom:25px;
+}
+.brand:hover {
+    border-color: #41454d;
+}
+
+.brand {
+    color: var(--second-color);
+    border: 2px solid transparent;
+    background: #212226;
+    border-radius: 8px;
+    padding: 14px;
+    padding:15px;
+}
+.brand{
+    width: 100px;
+    height:100px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-weight:700;
+    cursor:pointer;
+    transition: all 0.2s ease;
+}
+.brands {
+    gap: 8px;
+    padding: 0;
+}
+
+@media screen and (min-width:982px) {
+    .brands-container {
+        max-width: 1240px;
+        margin: 0 auto;
+        padding: 0 10%;
+        box-sizing: content-box;
+        margin-bottom:120px;
+    }
+    .brands {
+        display: flex;
+        flex-wrap: wrap;
+    }
+}
+
+@media screen and (max-width: 1180px) {
+    .brands-container {
+        padding: 0 5%;
+    }
+}
+
+@media screen and (max-width: 1050px) {
+    .brands-container {
+        padding: 0 15px;
+    }
+}
+@media screen and (max-width: 981.9px){
+    .brands {
+        margin-bottom: 25px;
+        display: grid;
+        grid-template-rows: auto auto;
+        grid-auto-flow: column;
+        overflow:auto;
+        scrollbar-width:none;
+    }
+    .brands-container{
+        margin-bottom:60px;
+    }
+}
+/*======================================== ADVERTISEMENT SECTION ========================================*/
+@keyframes marquee {
+    0% {
+        transform: translate(0);
+    }
+
+    100% {
+        transform: translate(-100%);
+    }
+}
+.adv-container {
+    white-space: nowrap;
+    overflow: hidden;
+    background: linear-gradient(265.97deg, #dd3535 6.66%, #000 107.46%);
+    display: block;
+}
+.advertisements {
+    display: inline-block;
+    padding: 20px 0;
+    animation: marquee 30s linear infinite;
+    white-space: nowrap;
+    color:var(--second-color);
+}
+.point{
+    padding:0 7px;
+    white-space:nowrap;
+}

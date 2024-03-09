@@ -1,0 +1,27 @@
+﻿.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 15px 20px;
+    border: 0 none;
+    white-space: nowrap;
+    vertical-align: middle;
+    outline: 0 none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    text-decoration: none;
+    transition: background linear .2s;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    cursor: pointer;
+    border-radius: 30px;
+    height: 40px;
+    font-weight: 500;
+    font-size: 16px;
+    color: #fff;
+    font-family: Roboto, sans-serif;
+    background-color: transparent;
+}
