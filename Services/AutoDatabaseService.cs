@@ -110,6 +110,17 @@ namespace Car_Dealer.Services
             return await Task.FromResult(autosQuery);
         }
 
+        /// <summary>
+        /// Retrieves count of existing autos with some model. 
+        /// </summary>
+        /// <param name="genModel"></param>
+        /// <returns>int which represent number of autos</returns>
+        public async Task<int> GetAutoCountByGenmodel(string genModel)
+        {
+            int count = _DbContext.Autos.Where(auto => auto.Genmodel == genModel).Count();
+            return await Task.FromResult(count);
+        }
+
 
         /// <summary>
         /// Retrieves a collection of auto images associated with the specified criteria.
@@ -120,6 +131,63 @@ namespace Car_Dealer.Services
         {
             IQueryable<AutoImageModel> imagesQuery = _DbContext.AutosImages.Where(img => img.Image_ID.StartsWith(id+"$$"));
             return await Task.FromResult(imagesQuery);
+        }
+
+        /// <summary>
+        /// Retrieves the primary auto image associated with the specified auto ID.
+        /// </summary>
+        /// <param name="id">The ID of the auto for which to retrieve the primary image.</param>
+        /// <returns>
+        /// A single AutoImageModel object representing the primary image associated with the auto
+        /// matching the specified ID. Returns null if no image is found.
+        /// </returns>
+        public async Task<AutoImageModel> GetAutoImageByAutoGenModel(string genModel)
+        {
+            string id = _DbContext.Autos.FirstOrDefault(auto => auto.Genmodel == genModel).Genmodel_ID; 
+            AutoImageModel image = _DbContext.AutosImages.FirstOrDefault(img => img.Image_ID.StartsWith(id+"$$") && img.Predicted_viewpoint == 90);
+            if(image == null)
+                _DbContext.AutosImages.FirstOrDefault(img => img.Image_ID.StartsWith(id + "$$") && img.Predicted_viewpoint <= 180);
+            return await Task.FromResult(image);
+        }
+
+        /// <summary>
+        /// Gets the body type of a specific car model.
+        /// </summary>
+        /// <param name="genModel">The generic model name of the car.</param>
+        /// <returns>A task representing the asynchronous operation that returns the body type of the specified car model as a string.</returns>
+        public async Task<string> GetModelBodyType(string genModel)
+        {
+            string bodyType = _DbContext.Autos.FirstOrDefault(auto => auto.Genmodel == genModel).Bodytype;
+            return await Task.FromResult(bodyType);
+        }
+
+        /// <summary>
+        /// Retrieves the top speed of a specific car model.
+        /// </summary>
+        /// <param name="genModel">The generic model name of the car.</param>
+        /// <returns>A task representing the asynchronous operation that returns the top speed of the specified car model as an integer.</returns>
+        public async Task<int> GetModelTopSpeed(string genModel)
+        {
+            int topSpeed = await _DbContext.Autos
+                                  .Where(auto => auto.Genmodel == genModel && auto.Top_speed.HasValue)
+                                  .OrderByDescending(auto => auto.Top_speed)
+                                  .Select(auto => auto.Top_speed.Value)
+                                  .FirstOrDefaultAsync();
+
+            return topSpeed!=null ? topSpeed : 0;
+        }
+
+        /// <summary>
+        /// Retrieves the average price of a specific car model.
+        /// </summary>
+        /// <param name="genModel">The generic model name of the car.</param>
+        /// <returns>A task representing the asynchronous operation that returns the average price of the specified car model as an integer.</returns>
+        public async Task<int> GetModelAveragePrice(string genModel)
+        {
+            var averagePrice = await _DbContext.Autos
+                                        .Where(auto => auto.Genmodel == genModel && auto.Price.HasValue)
+                                        .AverageAsync(auto => auto.Price);
+            return averagePrice.HasValue ? (int)averagePrice : 0;
         }
     }
 }

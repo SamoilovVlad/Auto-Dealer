@@ -48,7 +48,7 @@ namespace Car_Dealer.Controllers
         public async Task<IActionResult> GetAllGenModels(string makerName)
         {
             List<string> models = await _autoDatabaseService.GetAllGenModelByMakerName(makerName);
-            return models.Count > 0 ? Ok(models) : BadRequest(); 
+            return models.Count > 0 ? Ok(models) : BadRequest();
         }
         [HttpGet("{makerName}/Models/{genModel}")]
         public async Task<IActionResult> GetAllAutosFromGenModel(string makerName, string genModel)
@@ -57,12 +57,36 @@ namespace Car_Dealer.Controllers
             List<AutoModel> models = await modelsQuery.ToListAsync();
             return models.Count > 0 ? Ok(models) : BadRequest();
         }
+        [HttpGet("modelInfo/{genModel}")]
+        public async Task<IActionResult> GetAutoInfoByGenmodel(string genModel)
+        {
+            int count = await _autoDatabaseService.GetAutoCountByGenmodel(genModel);
+            string bodyType = await _autoDatabaseService.GetModelBodyType(genModel);
+            int topSpeed = await _autoDatabaseService.GetModelTopSpeed(genModel);
+            int price = await _autoDatabaseService.GetModelAveragePrice(genModel);
+            var modelInfo = new
+            {
+                count = count,
+                bodyType = bodyType,
+                topSpeed = topSpeed,
+                price = price
+            };
+
+            return Ok(modelInfo);
+        }
+
         [HttpGet("images/{id}")]
         public async Task<IActionResult> GetAutoImageNames(string id)
         {
             IQueryable<AutoImageModel> imageQuery = await _autoDatabaseService.GetAutoImagesByAutoID(id);
             List<AutoImageModel> autoImageModels = await imageQuery.ToListAsync();
             return autoImageModels.Count > 0 ? Ok(autoImageModels) : BadRequest();
+        }
+        [HttpGet("image/{genModel}")]
+        public async Task<IActionResult> GetAutoImageName(string genModel)
+        {
+            AutoImageModel image = await _autoDatabaseService.GetAutoImageByAutoGenModel(genModel);
+            return image == null ? BadRequest() : Ok(image);
         }
 
     }

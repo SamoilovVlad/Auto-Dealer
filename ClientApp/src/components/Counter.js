@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-import AppApi from './AppApi';
-import Auto from './Auto';
-import GoogleApi from './GoogleApi';
 
 export class Counter extends Component {
   static displayName = Counter.name;
@@ -22,9 +19,6 @@ export class Counter extends Component {
     return (
       <div>
         <h1>Counter</h1>
-
-            <p>This is a simple example of a React component.</p>
-            <Auto id={"7_10$$1"} />
 
         <p aria-live="polite">Current count: <strong>{this.state.currentCount}</strong></p>
 

@@ -1,1 +1,253 @@
-﻿
+﻿.brand-models-container h1 {
+    color: var(--second-color);
+}
+
+.model-list {
+    display: flex;
+    padding: 0;
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: 500;
+    margin-top:40px;
+}
+
+.model {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    min-height: 100%;
+}
+
+.model a{
+    display:flex;
+    flex-direction:column;
+    height:100%;
+}
+
+.auto-image-container {
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+    border-radius: 20px 20px 0 0;
+}
+
+.auto-image{
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    margin:auto;
+    transform:scale(1);
+    transition: all 0.5s ease;
+}
+
+.auto-image:hover{
+    transform:scale(1.2);
+}
+
+
+.model-info{
+    position:relative;
+}
+
+.model-info .title {
+    position: relative;
+    padding-top: 40px;
+    line-height: 1.3;
+    background: linear-gradient(360deg, #0e0e0e, rgba(14, 14, 14, 0));
+    text-align:center;
+}
+
+.model-details {
+    padding: 0 20px;
+    height: 86px;
+    gap:16px;
+    display:flex;
+    margin-bottom:24px;
+    background-color: var(--first-color);
+}
+
+.model-detail{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    flex:1;
+}
+
+.model-configuration{
+    margin-bottom:12px;
+    display:block;
+    text-align:center;
+}
+
+.show-more-models-btn {
+    border: 2px solid var(--second-color);
+    color: var(--second-color);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 20px;
+    white-space: nowrap;
+    vertical-align: middle;
+    outline: 0 none;
+    cursor: pointer;
+    border-radius: 30px;
+    height: 40px;
+    font-weight: 500;
+    font-size: 16px;
+    font-family: Roboto, sans-serif;
+    background-color: transparent;
+    width: calc(100% - 40px);
+    margin: 0 20px 20px;
+}
+.model a {
+    border: 2px solid #41454D !important;
+    border-radius: 20px;
+}
+.model-info .title {
+    font-size: 24px;
+    margin-top: -100px;
+}
+.brand-models-container h2 {
+    display: block;
+    font-weight: 700;
+    margin-bottom:8px;
+    font-size:40px;
+    color:var(--second-color);
+}
+
+@media screen and (max-width:1260.9px){
+    .model {
+        padding: 0;
+        flex: 0 0 32%;
+        max-width: 320px;
+    }
+
+    .auto-image-container{
+        flex: 0 0 280px;
+    }
+    .model-list{
+        justify-content:space-between;
+        flex-wrap:wrap;
+    }
+}
+
+@media screen and (max-width: 1260px) and (min-width: 1050px) {
+    .model {
+        padding: 0;
+        flex: 0 0 32%;
+        max-width: 425px;
+        margin-bottom:20px;
+    }
+
+    .auto-image-container {
+        flex: 0 0 280px;
+    }
+
+    .model-list {
+        justify-content:space-between;
+        flex-wrap: wrap;
+    }
+}
+
+@media screen and (max-width: 1180px) {
+    .brand-models-container {
+        padding: 0 5%;
+    }
+    .model {
+        margin-bottom: 20px;
+    }
+}
+
+@media screen and (max-width: 1050px) {
+    .brand-models-container {
+        padding: 0 15px;
+    }
+}
+
+@media screen and (max-width:950px){
+    .model {
+        padding: 0;
+        flex: 0 0 49%;
+        max-width: 600px;
+        margin-bottom: 20px;
+    }
+
+    .auto-image-container {
+        flex: 0 0 280px;
+    }
+
+    .model-list {
+        flex-wrap: wrap;
+    }
+} 
+
+@media screen and (max-width:630px){
+    .model {
+        padding: 0;
+        flex: 0 0 100%;
+        max-width: 600px;
+        margin-bottom: 20px;
+    }
+
+    .auto-image-container {
+        flex: 0 0 280px;
+    }
+
+    .model-list {
+        flex-wrap: wrap;
+    }
+}
+
+@media screen and (max-width: 981.9px) {
+    .brand-models-container h1 {
+        font-size: 24px;
+    }
+    .brand-models-container h2{
+        font-size:20px;
+    }
+}
+
+@media screen and (min-width:1261px){
+    .auto-image-container {
+        flex: 0 0 280px;
+    }
+
+    .model-list {
+        flex-wrap: wrap;
+        gap: 20px;
+        margin-left: 0;
+    }
+
+    .model {
+        padding: 0;
+        flex: 0 0 32%;
+        max-width: 425px;
+    }
+} 
+
+@media screen and (min-width: 1180.1px) {
+    .brand-models-container {
+        padding: 0 10%;
+    }
+}
+
+@media screen and (min-width:982px) {
+    .brand-models-container {
+        max-width: 1240px;
+        margin: 0 auto;
+        box-sizing: content-box;
+        margin-bottom: 120px;
+    }
+
+        .brand-models-container h1 {
+            font-size: 60px;
+        }
+}

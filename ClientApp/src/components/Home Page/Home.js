@@ -33,11 +33,11 @@ const Home = () => {
                     <h1>THE BEST <br /> AUTO DEALER <br /> IN THE WORLD</h1>
                     <div className='home-img'>
                         <picture>
-                            <source srcset="https://cdn.riastatic.com/docs/newauto/common_photos/lje6w7vjswljcy24.webp" type="image/webp" /><img src="https://cdn.riastatic.com/docs/newauto/common_photos/doqskafv2pespsk4.png" alt="auto" />
+                            <source srcSet="https://cdn.riastatic.com/docs/newauto/common_photos/lje6w7vjswljcy24.webp" type="image/webp" /><img src="https://cdn.riastatic.com/docs/newauto/common_photos/doqskafv2pespsk4.png" alt="auto" />
                         </picture>
                         <ul className='icons'>
-                            {icons.map((icon) => (
-                                <li className='icon'>
+                            {icons.map((icon, index) => (
+                                <li key={index} className='icon'>
                                     <HomeIcon src={icon.src} alt={icon.alt} children={(<span>{icon.alt}</span>)} />
                                 </li>
                             ))}
@@ -50,20 +50,20 @@ const Home = () => {
             </section>
             <section className='merits-container'>
                 <h2>DriveDreams Hub</h2>
-                <div className='merits'> {cards.map((card) => (<Card card={card} />))} </div>
+                <div className='merits'> {cards.map((card, index) => (<Card key={index} card={card} />))} </div>
             </section>
             <section className='brands-container'>
                 <h2>More than 80 Auto Brands and more than 890 Auto Models</h2>
-                <ul className='brands'>{popularBrands.map((brand) => (<li className='brand'><a href={'/'}>{brand}</a></li>))}
-                    <li style={{ fontWeight: '900', fontSize: '20px', textAlign: 'center' }} className='brand'><a href={'/'}>All brands</a></li>
+                <ul className='brands'>{popularBrands.map((brand, index) => (<a href={`/models/${brand}`} key={index} className='brand'><li>{brand}</li></a>))}
+                    <a href={'/'} style={{ fontWeight: '900', fontSize: '20px', textAlign: 'center' }} className='brand'><li>All brands</li></a>
                 </ul>
             </section>
             <section className='adv-container'>
                 <div className='advertisements'>
-                    {advertisements.map((adv) => (<><span class="point"> • </span><span><strong>{adv.title}</strong>{adv.text}</span></>))}
+                    {advertisements.map((adv) => (<><span className="point"> • </span><span><strong>{adv.title}</strong>{adv.text}</span></>))}
                 </div>
                 <div className='advertisements'>
-                    {advertisements.map((adv) => (<><span class="point"> • </span><span><strong>{adv.title}</strong>{adv.text}</span></>))}
+                    {advertisements.map((adv) => (<><span className="point"> • </span><span><strong>{adv.title}</strong>{adv.text}</span></>))}
                 </div>
             </section>
         </>

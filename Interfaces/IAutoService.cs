@@ -49,5 +49,44 @@ namespace Car_Dealer.Interfaces
         /// <param name="id">The ID of the auto for which to retrieve the images.</param>
         /// <returns>An IQueryable collection of AutoImageModel objects representing the images associated with the auto matching the specified ID.</returns>
         Task<IQueryable<AutoImageModel>> GetAutoImagesByAutoID(string id);
+
+        /// <summary>
+        /// Retrieves the primary auto image associated with the specified auto ID.
+        /// </summary>
+        /// <param name="genModel">The model name of the auto for which to retrieve the primary image.</param>
+        /// <returns>
+        /// A single AutoImageModel object representing the primary image associated with the auto
+        /// matching the specified model. Returns null if no image is found.
+        /// </returns>
+        Task<AutoImageModel> GetAutoImageByAutoGenModel(string genModel);
+
+        /// <summary>
+        /// Retrieves count of existing autos with some model. 
+        /// </summary>
+        /// <param name="genModel"></param>
+        /// <returns>int which represent number of autos</returns>
+        Task<int> GetAutoCountByGenmodel(string genModel);
+
+        /// <summary>
+        /// Gets the body type of a specific car model.
+        /// </summary>
+        /// <param name="genModel">The generic model name of the car.</param>
+        /// <returns>A task representing the asynchronous operation that returns the body type of the specified car model as a string.</returns>
+        Task<string> GetModelBodyType(string genModel);
+
+        /// <summary>
+        /// Retrieves the top speed of a specific car model.
+        /// </summary>
+        /// <param name="genModel">The generic model name of the car.</param>
+        /// <returns>A task representing the asynchronous operation that returns the top speed of the specified car model as an integer.</returns>
+        Task<int> GetModelTopSpeed(string genModel);
+
+        /// <summary>
+        /// Retrieves the average price of a specific car model.
+        /// </summary>
+        /// <param name="genModel">The generic model name of the car.</param>
+        /// <returns>A task representing the asynchronous operation that returns the average price of the specified car model as an integer.</returns>
+        Task<int> GetModelAveragePrice(string genModel);
+
     }
 }

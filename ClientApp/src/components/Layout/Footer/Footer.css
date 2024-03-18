@@ -1,0 +1,97 @@
+﻿footer {
+    display: block;
+    width: 100%;
+    background-color: #212226;
+    color: var(--second-color);
+    padding: 0 20px;
+    border-radius: 15px 15px 0 0;
+}
+.footer-social{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:15px 0;
+}
+.social {
+    display: flex;
+    width: 100%;
+    justify-content:center;
+    gap:15px;
+}
+.social a, .social svg{
+    border-radius:40%;
+    transition:all 0.5s ease;
+}
+.social a:hover{
+    background-color:var(--second-color);
+}
+.social a:hover svg{
+    fill:black !important;
+}
+.line{
+    height:1px;
+    background-color:white;
+    width:100%;
+}
+.footer-center{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    margin-top:10px;
+}
+.footer-center .title{
+    font-size:21px;
+    font-weight:700;
+}
+.footer-center .copy{
+    font-size:13px;
+}
+.footer-bottom{
+    padding:10px 0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap: 20px;
+}
+.footer-bottom .position{
+    font-size:15px;
+    position:relative;
+}
+.position:not(:last-child)::after{
+    content:"";
+    height:80%;
+    width:1px;
+    position:absolute;
+    right:-10px;
+    bottom:3px;
+    background-color:var(--second-color);
+}
+.footer-bottom a{
+    position:relative;
+}
+.footer-bottom a:before {
+    content: "";
+    position: absolute;
+    bottom:-3px;
+    width:100%;
+    height:1px;
+    background-color:var(--second-color);
+    transform:scale(0);
+    transition: transform 0.3s ease;
+}
+
+.footer-bottom a:hover::before{
+    transform:scale(1);
+}
+
+@media screen and (min-width:982px){
+    .social svg{
+        width:30px !important;
+        height:30px !important;
+    }
+}
+@media screen and (max-width: 981.9px){
+    .social{
+        padding:0 10px;
+    }
+}

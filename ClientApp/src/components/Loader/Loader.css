@@ -1,0 +1,19 @@
+﻿.loading {
+    position: fixed;
+    background-color: black;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    z-index: 1200;
+    object-fit:cover;
+    top: 0;
+    left:0;
+}
+
+    .loading img {
+        max-width: 100%;
+        height: auto;
+        display:flex;
+    }

@@ -1,5 +1,6 @@
-import Header from './Layout/Header/Header';
-import Container from './Layout/Container/Container';
+import Header from './Header/Header';
+import Container from './Container/Container';
+import Footer from './Footer/Footer';
 
 
 const Layout = ({ children, activePage}) => {
@@ -9,6 +10,7 @@ const Layout = ({ children, activePage}) => {
             <Container>
                 {children}
             </Container>
+            <Footer/>
         </div>
     );
 

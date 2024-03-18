@@ -1,7 +1,7 @@
 ﻿const GoogleApi = {
     client_ID: '10255400254-l2tptfksa0cfq5ghq4mmjslr5sfpb3t1.apps.googleusercontent.com',
     client_Secret: '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',
-    refresh_token: '1//04ONvvfW5RwYjCgYIARAAGAQSNwF-L9IrTNUh6QgGC8ukHlg8vVVWlvpT2YbE61r-TpE_oWeRxlW9M3_O3-LlFhC37XHWxVeXA3w',
+    refresh_token: '1//04TyWoJYsqMNWCgYIARAAGAQSNwF-L9Ir-Z16JDQYIL3gLcSdAK3pC9mcC8_Lox1sGp3OE1sB2IwkdhZF1RvjSQqBU99_-r6v4So',
     api_key: 'AIzaSyB8QuWuwqbEAVflr_v_G4Loea3LdbkGG9c',
 
     async getAccessToken() {
@@ -77,11 +77,12 @@
                 throw new Error('Failed to fetch data from Google Drive');
             }
             const blob = await response.blob();
-            const imageUrl = URL.createObjectURL(blob);
-            const imgElement = document.createElement('img');
-            imgElement.src = imageUrl;
+            //const imageUrl = URL.createObjectURL(blob);
+            //const imgElement = document.createElement('img');
+            //imgElement.src = imageUrl;
 
-            document.body.appendChild(imgElement);
+            //document.body.appendChild(imgElement);
+            return blob;
 
         } catch (error) {
             console.error('Error fetching data:', error.message);
@@ -104,7 +105,7 @@
             }
 
             const responseData = await response.json();
-            return responseData.files[0].id;
+            return responseData.files[0];
 
         } catch (error) {
             console.error('Error searching for file:', error.message);

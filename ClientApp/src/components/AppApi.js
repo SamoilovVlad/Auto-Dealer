@@ -41,6 +41,28 @@
             console.error('Error fetching auto data by ID:', error);
             throw error;
         }
+    },
+
+    async getAutoImageByGenmodelName(genmodelName) {
+        try {
+            const response = await fetch(`Autos/image/${genmodelName}`);
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error('Error fetching auto data by ID:', error);
+            throw error;
+        }
+    },
+
+    async getAutoInfoByModelName(modelName) {
+        try {
+            const response = await fetch(`Autos/modelInfo/${modelName}`);
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error('Error fetching auto data by ID:', error);
+            throw error;
+        }
     }
 };
 
