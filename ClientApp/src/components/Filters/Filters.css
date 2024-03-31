@@ -1,0 +1,101 @@
+﻿.filter {
+    caret-color: #fff;
+    background-color: #212226;
+    color: #fff;
+    margin: 0;
+    text-align: left;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    vertical-align: middle;
+    border: 2px solid #F0F2FA;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    box-sizing: border-box;
+    font-size: 16px;
+    font-family: Roboto, sans-serif;
+    border-radius: 20px;
+    text-indent: 16px;
+    padding: 9px 0;
+    line-height: 20px;
+    outline: 0 none;
+    transition: border .25s linear;
+    height: 40px;
+    padding: 10px 40px 8px 0;
+    line-height: 18px;
+    max-width:250px;
+}
+.filter::placeholder{
+    color:var(--second-color);
+}
+.price-filter{
+    max-width:150px;
+}
+
+.pseudo-select{
+    position:relative;
+    cursor:pointer;
+    display:flex;
+}
+    .pseudo-select .selected {
+        height: 40px;
+        min-width:200px;
+        padding: 10px 40px 10px 0;
+        line-height: 18px;
+        background: #212226 url(data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3.5 6L8 10.5L12.5 6' stroke='white' stroke-width='2'/%3E%3C/svg%3E%0A) calc(100% - 20px) 50% no-repeat;
+        border-color: white!important;
+    }
+    .pseudo-select .options-list {
+        background-color: #212226;
+        color: #fff;
+        overflow: auto;
+        cursor: auto;
+        position: absolute;
+        top:100%;
+        left: 0;
+        right: 0;
+        padding:0;
+        font-size: 16px;
+        border-radius: 0 0 20px 20px;
+        height: 0;
+        overflow: hidden;
+        z-index: -1;
+        transition:all 0.5s ease;
+    }
+    .pseudo-select.active .options-list{
+        height:auto;
+        z-index:1001;
+    }
+    .pseudo-select.active .selected{
+        border-radius:20px 20px 0 0;
+    }
+.options-list .option {
+    cursor: pointer;
+    padding: 10px 40px 10px 16px;
+    transition: all 0.5s ease;
+}
+        .options-list .option:hover {
+            background-color: var(--second-color);
+            color: #212226
+        }
+
+@media screen and (max-width: 695px) {
+    .filters {
+        flex-direction: column;
+        align-items: start;
+        justify-content: center;
+    }
+
+    .filter {
+        min-width:100%;
+    }
+
+    .pseudo-select{
+        width:100%;
+    }
+    .pseudo-select .selected{
+        min-width:100%;
+    }
+}

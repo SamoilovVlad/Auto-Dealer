@@ -21,49 +21,51 @@ namespace Car_Dealer.Controllers
         [HttpGet("auto/{id}")]
         public async Task<IActionResult> GetAuto(string id)
         {
-            AutoModel auto = await _autoDatabaseService.GetAutoById(id);
-
-            if (auto == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(auto);
+            AutoModel? auto = await _autoDatabaseService.GetAutoByAdvId(id);
+            return auto == null ? NotFound() : Ok(auto);
         }
 
         [HttpGet("{Maker}/Models/Cars")]
         public async Task<IActionResult> GetAutosByMakerName(string maker)
         {
-            IQueryable<AutoModel?> autosQuery = await _autoDatabaseService.GetAutosByMakerName(maker);
-            List<AutoModel?> autos = await autosQuery.ToListAsync();  
+            IQueryable<AutoModel?> autosQuery = await _autoDatabaseService.GetAutosByMakerNameAsync(maker);
+            List<AutoModel?> autos = await autosQuery.ToListAsync();
             return autos.Count > 0 ? Ok(autos) : BadRequest();
         }
+
         //[HttpGet("AutoMakers")]
         //public async Task<IActionResult> GetAllAutoMakers()
         //{
         //    return Ok(await _autoDatabaseService.GetAllAutoMakers());
 
         //}
+
         [HttpGet("{makerName}/Models")]
         public async Task<IActionResult> GetAllGenModels(string makerName)
         {
-            List<string> models = await _autoDatabaseService.GetAllGenModelByMakerName(makerName);
+            List<string?> models = await _autoDatabaseService.GetAllGenModelByMakerNameAsync(makerName);
             return models.Count > 0 ? Ok(models) : BadRequest();
         }
+
         [HttpGet("{makerName}/Models/{genModel}")]
-        public async Task<IActionResult> GetAllAutosFromGenModel(string makerName, string genModel)
+        public async Task<IActionResult> GetAllAutosByMakerAndModelNames(string makerName, string genModel, int page=0, int pageSize=12)
         {
-            IQueryable<AutoModel> modelsQuery = await _autoDatabaseService.GetAllAutosByGenModel(makerName, genModel);
-            List<AutoModel> models = await modelsQuery.ToListAsync();
-            return models.Count > 0 ? Ok(models) : BadRequest();
+            IQueryable<AutoModel?> modelsQuery = await _autoDatabaseService.GetAllAutosByGenModelAsync(makerName, genModel);
+            ////Will be filtered
+            int autoCount = modelsQuery.Count();
+            if (page > 0)
+                modelsQuery = modelsQuery.Skip((page - 1) * pageSize).Take(pageSize);
+            List<AutoModel?> models = await modelsQuery.ToListAsync();
+            return models.Count > 0 ? Ok(new { models, autoCount}) : BadRequest();
         }
-        [HttpGet("modelInfo/{genModel}")]
-        public async Task<IActionResult> GetAutoInfoByGenmodel(string genModel)
+
+        [HttpGet("modelInfo/{makerName}/{genModel}")]
+        public async Task<IActionResult> GetAutoInfoByGenModel(string makerName, string genModel)
         {
-            int count = await _autoDatabaseService.GetAutoCountByGenmodel(genModel);
-            string bodyType = await _autoDatabaseService.GetModelBodyType(genModel);
-            int topSpeed = await _autoDatabaseService.GetModelTopSpeed(genModel);
-            int price = await _autoDatabaseService.GetModelAveragePrice(genModel);
+            int count = await _autoDatabaseService.GetAutoCountByGenModelAsync(makerName, genModel);
+            string bodyType = await _autoDatabaseService.GetModelBodyTypeAsync(makerName, genModel);
+            int topSpeed = await _autoDatabaseService.GetModelTopSpeedAsync(makerName, genModel);
+            int price = await _autoDatabaseService.GetModelAveragePriceAsync(makerName, genModel);
             var modelInfo = new
             {
                 count = count,
@@ -75,18 +77,32 @@ namespace Car_Dealer.Controllers
             return Ok(modelInfo);
         }
 
-        [HttpGet("images/{id}")]
-        public async Task<IActionResult> GetAutoImageNames(string id)
+        [HttpGet("images/{advId}")]
+        public async Task<IActionResult> GetAutoImageNames(string advId)
         {
-            IQueryable<AutoImageModel> imageQuery = await _autoDatabaseService.GetAutoImagesByAutoID(id);
+            IQueryable<AutoImageModel> imageQuery = await _autoDatabaseService.GetAutoImagesByAdvIdAsync(advId);
             List<AutoImageModel> autoImageModels = await imageQuery.ToListAsync();
             return autoImageModels.Count > 0 ? Ok(autoImageModels) : BadRequest();
         }
-        [HttpGet("image/{genModel}")]
-        public async Task<IActionResult> GetAutoImageName(string genModel)
+
+        [HttpGet("image/{makerName}/{genModel}")]
+        public async Task<IActionResult> GetAutoImageName(string makerName, string genModel)
         {
-            AutoImageModel image = await _autoDatabaseService.GetAutoImageByAutoGenModel(genModel);
-            return image == null ? BadRequest() : Ok(image);
+            AutoImageModel? image = null;
+            int numOfSkippedAuto = 0; // Variable to track the number of autos skipped when searching for an image || Not every auto have images
+            while (image == null)
+            {
+                IQueryable<AutoModel?> autos = await _autoDatabaseService.GetAllAutosByGenModelAsync(makerName, genModel);
+                string? advId = await autos
+                                      .Select(auto => auto.Adv_ID)
+                                      .Skip(numOfSkippedAuto)
+                                      .FirstOrDefaultAsync();
+
+                IQueryable<AutoImageModel> imagesQuery = await _autoDatabaseService.GetAutoImagesByAdvIdAsync(advId);
+                image = await imagesQuery.FirstOrDefaultAsync(img => img.Predicted_viewpoint <= 90);
+                numOfSkippedAuto++;
+            }
+            return image == null ? BadRequest("image == null") : Ok(image);
         }
 
     }

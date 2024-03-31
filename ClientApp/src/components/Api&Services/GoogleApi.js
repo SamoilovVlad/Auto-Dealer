@@ -1,8 +1,8 @@
 ﻿const GoogleApi = {
     client_ID: '10255400254-l2tptfksa0cfq5ghq4mmjslr5sfpb3t1.apps.googleusercontent.com',
     client_Secret: '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',
-    refresh_token: '1//04TyWoJYsqMNWCgYIARAAGAQSNwF-L9Ir-Z16JDQYIL3gLcSdAK3pC9mcC8_Lox1sGp3OE1sB2IwkdhZF1RvjSQqBU99_-r6v4So',
-    api_key: 'AIzaSyB8QuWuwqbEAVflr_v_G4Loea3LdbkGG9c',
+    refresh_token: '1//04IkWHXEEXGKSCgYIARAAGAQSNwF-L9IrO89-9FT3lZzShBX0ypzzSxL2Z1TytUhqXrQJMtz7TRcJVDJu9rvStaTcn8I3Xo_u-yM',
+    api_key: 'AIzaSyDqBSjBa-mXgNuASntjm2Fd3uatdgcK3M8',
 
     async getAccessToken() {
         const cookies = document.cookie.split('; ');

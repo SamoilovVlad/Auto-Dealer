@@ -45,9 +45,10 @@ const Header = ({ activePage }) => {
             <header className='header'>
                 <div className='header-inner'>
                     <div className='logo'>
-                        <a href='/'>
-                            <img src='https://cdn.riastatic.com/docs/newauto/common_photos/eng3dpw3646sonuo.svg' alt='logo' />
-                        </a>
+                        <span style={{fontSize:'30px', fontWeight:'700'}}>.Logo</span>
+                        {/*<a href='/'>*/}
+                        {/*    <img src='https://cdn.riastatic.com/docs/newauto/common_photos/eng3dpw3646sonuo.svg' alt='logo' />*/}
+                        {/*</a>*/}
                     </div>
                     <ul className='navbar'>
                         {navItems.map((item, index) => (<NavItem key={index} item={item}/>))}

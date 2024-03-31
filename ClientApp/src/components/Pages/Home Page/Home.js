@@ -1,5 +1,7 @@
-﻿import Button from '../Button/Button';
-import { icons, cards, popularBrands, advertisements } from '../StaticData';
+﻿import React, { useState } from 'react'
+import Button from '../../Button/Button';
+import { icons, cards, popularBrands, advertisements, frequentlyQuestions } from '../../StaticData';
+import ContactForm from '../../Contact Forn/ContactForm';
 import './Home.css';
 
 const HomeIcon = ({ src, alt, children }) => {
@@ -24,6 +26,32 @@ const Card = ({ card }) => {
         </div>
     );
 }
+
+const FAQ = ({ frequentlyQuestions }) => {
+    //Which question was opened
+    const [openedIndex, setOpenedIndex] = useState(null);
+
+    function onQuestionClick(index) {
+        setOpenedIndex(openedIndex === index ? null : index);
+    }
+
+    return (
+        <ul className='questions-list'>
+            {frequentlyQuestions.map((question, index) => (
+                <li key={index} className='question'>
+                    <span
+                        className={`question-title ${openedIndex === index ? 'open' : ''}`}
+                        onClick={() => onQuestionClick(index)}>
+                        {question.title}
+                    </span>
+                    <div className={`question-body ${openedIndex === index ? 'open' : ''}`}>
+                        {question.body}
+                    </div>
+                </li>
+            ))}
+        </ul>
+    );
+};
 
 const Home = () => {
     return (
@@ -60,11 +88,19 @@ const Home = () => {
             </section>
             <section className='adv-container'>
                 <div className='advertisements'>
-                    {advertisements.map((adv) => (<><span className="point"> • </span><span><strong>{adv.title}</strong>{adv.text}</span></>))}
+                    {advertisements.map((adv, index) => (<div key={index}><span className="point"> • </span><span><strong>{adv.title}</strong>{adv.text}</span></div>))}
                 </div>
                 <div className='advertisements'>
-                    {advertisements.map((adv) => (<><span className="point"> • </span><span><strong>{adv.title}</strong>{adv.text}</span></>))}
+                    {advertisements.map((adv, index) => (<div key={index}><span className="point"> • </span><span><strong>{adv.title}</strong>{adv.text}</span></div>))}
                 </div>
+            </section>
+            <section className='questions-container'>
+                <h2>FAQ</h2>
+                <FAQ frequentlyQuestions={frequentlyQuestions} />
+            </section>
+            <section className='contacts-container'>
+                <h2>Contacts</h2>
+                <ContactForm/>
             </section>
         </>
     );

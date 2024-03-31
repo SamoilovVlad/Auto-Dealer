@@ -1,8 +1,9 @@
 import { Counter } from "./components/Counter";
 import { FetchData } from "./components/FetchData";
-import Home from "./components/Home Page/Home";
 import Layout from "./components/Layout/Layout";
-import Models from "./components/Models Page/Models";
+import Home from "./components/Pages/Home Page/Home";
+import Models from "./components/Pages/Models Page/Models";
+import Autos from "./components/Pages/Autos Page/Autos";
 
 
 const AppRoutes = [
@@ -37,6 +38,10 @@ const AppRoutes = [
     {
         path: `/models/:brand`,
         element: <Layout><Models /></Layout>
+    },
+    {
+        path: `/model/:brand/:modelName/page/:pageNumber/pageSize/:pageSize`,
+        element: <Layout><Autos /></Layout>
     },
 
 ];

@@ -173,13 +173,14 @@
     }
 }
 /*======================================== MERITS SECTION ========================================*/
-.merits-container{
+.merits-container {
     margin-bottom: 120px !important;
 }
-.merits-container h2 {
-    color: var(--second-color);
-    margin-bottom: 20px;
-}
+
+    .merits-container h2 {
+        color: var(--second-color);
+        margin-bottom: 20px;
+    }
 
 .merits {
     display: flex;
@@ -238,7 +239,7 @@
 @media screen and (max-width: 981.9px) {
     .merits-container {
         width: 100%;
-        margin-bottom:60px !important;
+        margin-bottom: 60px !important;
     }
 
         .merits-container h2 {
@@ -256,11 +257,12 @@
     }
 }
 /*======================================== AUTO BRANDS SECTION ========================================*/
-.brands-container h2{
-    color:var(--second-color);
-    font-size:40px;
-    margin-bottom:25px;
+.brands-container h2 {
+    color: var(--second-color);
+    font-size: 40px;
+    margin-bottom: 25px;
 }
+
 .brand:hover {
     border-color: #41454d;
 }
@@ -271,18 +273,20 @@
     background: #212226;
     border-radius: 8px;
     padding: 14px;
-    padding:15px;
+    padding: 15px;
 }
-.brand{
+
+.brand {
     width: 100px;
-    height:100px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-weight:700;
-    cursor:pointer;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    cursor: pointer;
     transition: all 0.2s ease;
 }
+
 .brands {
     gap: 8px;
     padding: 0;
@@ -294,8 +298,9 @@
         margin: 0 auto;
         padding: 0 10%;
         box-sizing: content-box;
-        margin-bottom:120px;
+        margin-bottom: 120px;
     }
+
     .brands {
         display: flex;
         flex-wrap: wrap;
@@ -313,17 +318,19 @@
         padding: 0 15px;
     }
 }
-@media screen and (max-width: 981.9px){
+
+@media screen and (max-width: 981.9px) {
     .brands {
         margin-bottom: 25px;
         display: grid;
         grid-template-rows: auto auto;
         grid-auto-flow: column;
-        overflow:auto;
-        scrollbar-width:none;
+        overflow: auto;
+        scrollbar-width: none;
     }
-    .brands-container{
-        margin-bottom:60px;
+
+    .brands-container {
+        margin-bottom: 60px;
     }
 }
 /*======================================== ADVERTISEMENT SECTION ========================================*/
@@ -336,21 +343,216 @@
         transform: translate(-100%);
     }
 }
+
 .adv-container {
     white-space: nowrap;
     overflow: hidden;
     background: linear-gradient(265.97deg, #dd3535 6.66%, #000 107.46%);
     display: block;
-    margin-bottom: 50px;
+    margin-bottom: 60px;
 }
+
 .advertisements {
-    display: inline-block;
+    display: inline-flex;
     padding: 20px 0;
     animation: marquee 30s linear infinite;
     white-space: nowrap;
-    color:var(--second-color);
+    color: var(--second-color);
 }
-.point{
-    padding:0 7px;
-    white-space:nowrap;
+
+.point {
+    padding: 0 7px;
+    white-space: nowrap;
+}
+
+/*======================================== FREQUENTLY ASKED QUESTIONS SECTION ========================================*/
+
+.questions-container {
+    margin-bottom: 120px !important;
+    position: relative;
+}
+
+    .questions-container h2 {
+        font-size: 20px;
+        margin-bottom: 20px;
+        color: var(--second-color);
+        font-family: Montserrat, sans-serif;
+        font-weight: 600;
+    }
+
+.questions-list {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    font-family: Roboto, sans-serif;
+    color: var(--second-color);
+}
+
+.question {
+    line-height: 1.25;
+    transition: background .3s linear, color .3s linear;
+    overflow: hidden;
+    background: #212226;
+}
+
+    .question .question-title {
+        display: block;
+        position: relative;
+        cursor: pointer;
+        font-weight: 600;
+        font-family: Montserrat, sans-serif;
+    }
+
+.question-title::after {
+    position: absolute;
+    top: 17px;
+    right: 30px;
+    font-size: 40px;
+    transform: rotate(90deg);
+    line-height: 24px;
+    content: "›";
+}
+
+.question > div {
+    opacity: 0;
+    height: 0;
+    transition: opacity .2s ease, padding .2s ease, height .2s ease;
+    padding: 0 15px;
+    font-size: 16px;
+}
+
+.question-title.open + div {
+    height: auto;
+    opacity: 1;
+    padding-bottom: 20px;
+}
+
+
+@media screen and (min-width:982px) {
+    .questions-container {
+        max-width: 1240px;
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 10%;
+    }
+
+        .questions-container h2 {
+            font-size: 24px;
+        }
+
+    .question {
+        border-radius: 8px;
+        margin-top: 10px;
+    }
+
+        .question .question-title {
+            font-size: 20px;
+            padding: 20px 44px 20px 20px;
+        }
+
+    .question-title::after {
+        right: 35px !important;
+    }
+
+    .question-title.open::after {
+        transform: rotate(-90deg);
+        right: 40px !important;
+    }
+}
+
+@media screen and (max-width: 1180px) {
+    .questions-container {
+        padding: 0 5%;
+    }
+}
+
+@media screen and (max-width: 1050px) {
+    .questions-container {
+        padding: 0 15px;
+    }
+}
+
+@media screen and (max-width: 981.9px) {
+    .questions-container {
+        padding: 0;
+    }
+
+        .questions-container h2 {
+            padding: 0 15px;
+        }
+
+    .question {
+        border-bottom: 2px solid #41454D;
+    }
+
+        .question .question-title {
+            font-size: 16px;
+            padding: 15px 50px 15px 15px;
+        }
+
+    .question-title::after {
+        right: 17px;
+        line-height: 18px;
+    }
+
+    .question-title.open::after {
+        transform: rotate(-90deg);
+        right: 22px !important;
+    }
+
+    .question > div {
+        padding: 0 15px;
+    }
+}
+
+
+/*======================================== CONTACTS SECTION ========================================*/
+
+.contacts-container {
+    position: relative;
+    margin-bottom: 120px !important;
+}
+
+.contacts-container h2 {
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: var(--second-color);
+    font-family: Montserrat, sans-serif;
+    font-weight: 600;
+}
+
+@media screen and (min-width:982px) {
+    .contacts-container {
+        max-width: 1240px;
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 10%;
+    }
+
+    .contacts-container h2 {
+        font-size: 24px;
+    }
+}
+
+
+@media screen and (max-width: 1180px) {
+    .contacts-container {
+        padding: 0 5%;
+    }
+}
+
+@media screen and (max-width: 1050px) {
+    .contacts-container {
+        padding: 0 15px;
+    }
+}
+
+@media screen and (max-width: 981.9px) {
+    .contacts-container {
+        padding: 0;
+    }
+
+    .contacts-container h2 {
+        padding: 0 15px;
+    }
 }
