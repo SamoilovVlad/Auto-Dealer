@@ -1,1 +1,25 @@
-﻿
+﻿.autos-catalog-container {
+    margin-bottom: 30px;
+    position: relative;
+}
+
+@media screen and (min-width:1180px) {
+    .autos-catalog-container {
+        max-width: 1240px;
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 10%;
+    }
+}
+
+@media screen and (min-width:1050px) and (max-width: 1179.8px) {
+    .autos-catalog-container {
+        padding: 0 5%;
+    }
+}
+
+@media screen and (max-width: 1049.8px) {
+    .autos-catalog-container {
+        padding: 15px;
+    }
+}

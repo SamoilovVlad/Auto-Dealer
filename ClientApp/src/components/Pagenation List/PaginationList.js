@@ -36,12 +36,12 @@ const PaginationList = ({ currentPage, lastPage, maxItems, data, onChangePage, L
 
     const makeListWithItemComponents = () => {
         return data.slice(0, maxItems).map((item, index) => (
-            <ListItemComponent
-                key={index}
-                modelInfo={item.modelInfo}
-                src={item.img}
-                model={item.model}
-                brand={brand}
+            < ListItemComponent
+                key = { index }
+                modelInfo = { item.modelInfo }
+                src = { item.img }
+                model = { item.model }
+                brand = { brand }
             />
         ));
     };

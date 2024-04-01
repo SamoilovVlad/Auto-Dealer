@@ -1,10 +1,10 @@
-﻿const AutoModelCard = ({brand, model, src, modelInfo}) => {
+﻿const AutoModelCard = ({brand, model, src, modelInfo, key}) => {
     if(src!==undefined)
     return (
-        <li key={model} className='model'>
+        <div key={key} className='model'>
             <a href={`/model/${brand}/${model}/page/1/pageSize/12`}>
                 <div className='auto-image-container'>
-                    <img className='auto-image' src={URL.createObjectURL(src)} alt='car' />
+                   <img className='auto-image' src={URL.createObjectURL(src)} alt='car' />
                 </div>
                 <div className='model-info'>
                     <p className='title'>{model}</p>
@@ -26,7 +26,7 @@
                     <div className='show-more-models-btn'>Choose your model</div>
                 </div>
             </a>
-        </li>
+        </div>
     );
 }
 export default AutoModelCard;
