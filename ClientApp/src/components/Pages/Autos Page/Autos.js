@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect} from 'react';
 import { useParams } from 'react-router-dom';
 import AppApi from '../../Api&Services/AppApi';
 import GoogleApi from '../../Api&Services/GoogleApi';
@@ -24,11 +24,16 @@ const Autos = () => {
                     try {
                         const imageModels = await AppApi.getAutoImagesById(modelInfo.adv_ID);
                         var imageModel = imageModels.find(img => img.predicted_viewpoint <= ImgPredictedViewPoint);
-                        const res = await GoogleApi.searchFileByName(imageModel.image_name);
+                        var res;
+                        //If we can`t find image with good view, we take first existing image of this car.
+                        imageModel ? res = await GoogleApi.searchFileByName(imageModel.image_name) : res = await GoogleApi.searchFileByName(imageModels[0].image_name);
                         const img = await GoogleApi.fetchDriveData(res.id);
-                        return { modelInfo, img, model:modelName}
+
+                        return img && modelInfo ? { modelInfo, img, model: modelName } : null;
+
                     } catch (error) {
                         console.error('Error fetching image data:', error);
+                        return null;
                     }
                 });
 
@@ -44,8 +49,9 @@ const Autos = () => {
         fetchData();
     }, [brand, modelName, pageNumber, pageSize]);
 
-    const loadPage = (brand,model,pageNumber,pageSize) => {
-        //window.location.href = `/Autos/Models/${}`;
+    const loadPage = (pageNumber) => {
+        const newUrl = `${window.location.origin}/model/${brand}/${modelName}/page/${pageNumber}/pageSize/12`;
+        window.location.href = newUrl;
     }
 
     return (
@@ -57,7 +63,7 @@ const Autos = () => {
                     {document.body.classList.remove('scroll-off')}
                     <PaginationList
                         brand={brand}
-                        currentPage={pageNumber}
+                        currentPage={parseInt(pageNumber)}
                         lastPage={Math.ceil(autoCount / pageSize)}
                         maxItems={pageSize}
                         data={autosData}

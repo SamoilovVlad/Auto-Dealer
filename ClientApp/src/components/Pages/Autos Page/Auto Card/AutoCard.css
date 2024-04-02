@@ -20,7 +20,7 @@
 }
 
     .wrapper:hover {
-        transform: scale(1.05);
+        transform: scale(1.02);
         box-shadow: 5px 20px 30px rgba(0, 0, 0, 0.2);
     }
 
@@ -43,10 +43,11 @@
     align-items:center;
 
 }
-.card-title {
+.top .card-title {
     position:absolute;
     bottom:0;
     padding-top:125px;
+    padding-bottom:15px;
     text-align: center;
     color: var(--second-color);
     text-align: center;
@@ -59,6 +60,7 @@
     max-height:20%;
     height: 20%;
     transition: transform 0.5s;
+    border-top:2px solid var(--second-color);
 }
 
     .bottom.clicked {
@@ -231,6 +233,15 @@ p {
 
 .details p{
     margin-top:auto;
+}
+
+.pb-30{
+    padding-bottom:20px;
+}
+
+table .title{
+    font-weight:700;
+    font-size:18px;
 }
 
 
