@@ -23,7 +23,7 @@
     outline: 0 none;
     transition: border .25s linear;
     height: 40px;
-    padding: 10px 40px 8px 0;
+    padding: 10px 0px 8px 0;
     line-height: 18px;
     max-width:250px;
 }
@@ -34,6 +34,17 @@
     max-width:150px;
 }
 
+
+.input-filter-container{
+    display:flex;
+    align-items:center;
+    position:relative;
+    width:100%;
+}
+.input-icon{
+    position:absolute;
+    right:10px;
+}
 .pseudo-select{
     position:relative;
     cursor:pointer;
@@ -63,6 +74,8 @@
         overflow: hidden;
         z-index: -1;
         transition:all 0.5s ease;
+        max-height:300px;
+        overflow-y:auto;
     }
     .pseudo-select.active .options-list{
         height:auto;
@@ -81,6 +94,13 @@
             color: #212226
         }
 
+.color{
+    width:20px;
+    height:20px;
+    background-color:red;
+    border-radius:20%;
+}
+
 @media screen and (max-width: 695px) {
     .filters {
         flex-direction: column;
@@ -88,9 +108,9 @@
         justify-content: center;
     }
 
-    .filter {
+    /*.filter {
         min-width:100%;
-    }
+    }*/
 
     .pseudo-select{
         width:100%;

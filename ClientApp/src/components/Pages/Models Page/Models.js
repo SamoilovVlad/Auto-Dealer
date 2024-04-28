@@ -6,6 +6,7 @@ import GoogleApi from '../../Api&Services/GoogleApi';
 import AppApi from '../../Api&Services/AppApi';
 import PaginationList from '../../Pagenation List/PaginationList';
 import AutoModelCard from './AutoModelCard';
+import { modelsBodyTypes } from '../../StaticData';
 import { InputFilter, SelectFilter } from '../../Filters/Filters';
 
 
@@ -99,6 +100,11 @@ const Models = () => {
         setFilters({ ...filters, maxPrice: event.target.value })
     };
 
+    const dollarIcon = (
+        <svg className='input-icon' xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style={{ fill: 'white' }}>
+            <path d="M15.999 8.5h2c0-2.837-2.755-4.131-5-4.429V2h-2v2.071c-2.245.298-5 1.592-5 4.429 0 2.706 2.666 4.113 5 4.43v4.97c-1.448-.251-3-1.024-3-2.4h-2c0 2.589 2.425 4.119 5 4.436V22h2v-2.07c2.245-.298 5-1.593 5-4.43s-2.755-4.131-5-4.429V6.1c1.33.239 3 .941 3 2.4zm-8 0c0-1.459 1.67-2.161 3-2.4v4.799c-1.371-.253-3-1.002-3-2.399zm8 7c0 1.459-1.67 2.161-3 2.4v-4.8c1.33.239 3 .941 3 2.4z"></path>
+        </svg>
+    );
 
     //Returns container with a list of models for the current page
     return (
@@ -108,16 +114,21 @@ const Models = () => {
             ) : (
                 <>
                     {document.body.classList.remove('scroll-off')}
-                    <section className='brand-models-container'>
+                        <section className='brand-models-container'>
+                            <div className='navigation'>
+                                <a className='nav-btn' href='/'>Brands</a>
+                                <svg className='nav-arrow' xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" style={{fill:'white'}}><path d="M10.061 19.061 17.121 12l-7.06-7.061-2.122 2.122L12.879 12l-4.94 4.939z"></path></svg>
+                                <a className='nav-btn active' href={`/models/${brand}`}>{brand}</a>
+                            </div>
                         <h1>{brand} brand models <br /> from DriveDreams Hub</h1>
                         <div className='filters'>
                             <InputFilter handleOnChange={handleInputChange} value={filters.modelName} placeholder='Model Name' classes={'filter'} />
-                            <SelectFilter handleOnChange={handleSelectChange} id='selectFilter1' title='All Types'/>
-                            <InputFilter handleOnChange={handleMinPriceChange} value={filters.minPrice} placeholder='min price' classes={'filter price-filter'} />
-                            <InputFilter handleOnChange={handleMaxPriceChange} value={filters.maxPrice} placeholder='max price' classes={'filter price-filter'} />
+                            <SelectFilter handleOnChange={handleSelectChange} id='selectFilter1' title='All Types' options={modelsBodyTypes} />
+                                <InputFilter handleOnChange={handleMinPriceChange} value={filters.minPrice} placeholder='min price' classes={'filter price-filter'} icon={dollarIcon} />
+                                <InputFilter handleOnChange={handleMaxPriceChange} value={filters.maxPrice} placeholder='max price' classes={'filter price-filter'} icon={dollarIcon} />
                         </div>
                         <h2>{modelsCount} car models meet your requests</h2>
-                            {<PaginationList currentPage={currentPage}
+                        {<PaginationList currentPage={currentPage}
                             brand={brand}
                             lastPage={Math.ceil(modelsCount / cardsOnPage)}
                             maxItems={cardsOnPage}

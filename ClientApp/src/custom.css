@@ -36,6 +36,27 @@ p, h1, h2, h3, h4, h5, h6, span {
     font-size: 18px;
 }
 
+.nav-arrow{
+    margin: 0 10px;
+}
+
+.nav-btn{
+    font-size:18px;
+    color: white;
+}
+.nav-btn.active{
+    color:var(--third-color);
+    font-weight:700;
+    font-size:20px;
+}
+
+.navigation{
+    display:flex;
+    align-items:center;
+    justify-content:flex-start;
+    margin-bottom:20px;
+}
+
 :root {
     --first-color: #0e0e0e;
     --second-color: #ffffff;

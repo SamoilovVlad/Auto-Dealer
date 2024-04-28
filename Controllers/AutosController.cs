@@ -4,6 +4,7 @@ using Car_Dealer.Services;
 using Microsoft.AspNetCore.Http.Metadata;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace Car_Dealer.Controllers
 {
@@ -17,11 +18,10 @@ namespace Car_Dealer.Controllers
             _autoDatabaseService = autoDatabaseService;
         }
 
-        //Take an auto by Id
-        [HttpGet("auto/{id}")]
-        public async Task<IActionResult> GetAuto(string id)
+        [HttpGet("auto/info/{advId}")]
+        public async Task<IActionResult> GetAuto( string advId)
         {
-            AutoModel? auto = await _autoDatabaseService.GetAutoByAdvId(id);
+            AutoModel? auto = await _autoDatabaseService.GetAutoByAdvId(advId);
             return auto == null ? NotFound() : Ok(auto);
         }
 
@@ -48,15 +48,25 @@ namespace Car_Dealer.Controllers
         }
 
         [HttpGet("{makerName}/Models/{genModel}")]
-        public async Task<IActionResult> GetAllAutosByMakerAndModelNames(string makerName, string genModel, int page=0, int pageSize=12)
+        public async Task<IActionResult> GetAllAutosByMakerAndModelNames(string makerName, string genModel, int page=0, int pageSize=12, string bodyType="", string gearBox="", string fuelType="", int minPrice=0, int maxPrice=int.MaxValue)
         {
             IQueryable<AutoModel?> modelsQuery = await _autoDatabaseService.GetAllAutosByGenModelAsync(makerName, genModel);
-            ////Will be filtered
+
+            //Filtering
+            if (!string.IsNullOrEmpty(bodyType.Trim()))
+                modelsQuery = modelsQuery.Where(auto => auto.Bodytype == bodyType);
+            if (!string.IsNullOrEmpty(gearBox.Trim()))
+                modelsQuery = modelsQuery.Where(auto => auto.Gearbox == gearBox);
+            if (!string.IsNullOrEmpty(fuelType.Trim()))
+                modelsQuery = modelsQuery.Where(auto => auto.Fuel_type == fuelType);
+            if (minPrice > 0 || maxPrice < int.MaxValue)
+                modelsQuery = modelsQuery.Where(auto => auto.Price >= minPrice && auto.Price <= maxPrice);
+
             int autoCount = modelsQuery.Count();
             if (page > 0)
                 modelsQuery = modelsQuery.Skip((page - 1) * pageSize).Take(pageSize);
-            List<AutoModel?> models = await modelsQuery.ToListAsync();
-            return models.Count > 0 ? Ok(new { models, autoCount}) : BadRequest();
+            IEnumerable<AutoModel?> models = await modelsQuery.ToListAsync();
+            return Ok(new { models, autoCount });
         }
 
         [HttpGet("modelInfo/{makerName}/{genModel}")]

@@ -1,31 +1,22 @@
 ﻿import React, { useState, useEffect } from 'react';
 import './Filters.css';
 
-const dataForFilters = {
-    modelsBodyTypes: [
-        { name: 'All types', value: '' },
-        { name: 'SUV', value: 'SUV' },
-        { name: 'Saloon', value: 'Saloon' },
-        { name: 'Hatchback', value: 'Hatchback' },
-        { name: 'Convertible', value: 'Convertible' },
-        { name: 'MPV', value: 'MPV' },
-        { name: 'Coupe', value: 'Coupe' },
-        { name: 'Manual', value: 'Manual' }
-    ]
-};
 
-export function InputFilter({ placeholder, value, handleOnChange, classes }) {
+export function InputFilter({ placeholder, value, handleOnChange, classes, icon }) {
     return (
-        <input
-            className={classes}
-            value={value}
-            onChange={handleOnChange}
-            placeholder={placeholder}
-        />
+        <div className='input-filter-container'>
+            <input
+                className={classes}
+                value={value}
+                onChange={handleOnChange}
+                placeholder={placeholder}
+            />
+            {icon}
+        </div>
     );
 }
 
-export function SelectFilter({ handleOnChange, id, title }) {
+export function SelectFilter({ handleOnChange, id, title, options }) {
     const [isActive, setIsActive] = useState(false);
 
     useEffect(() => {
@@ -47,7 +38,9 @@ export function SelectFilter({ handleOnChange, id, title }) {
 
     function onOptionClick(option) {
         document.querySelector(`#${id} .selected`).textContent = option.name;
-        handleOnChange(option.value);
+        if (handleOnChange !== undefined) {
+            handleOnChange(option.value);
+        }
         setIsActive(false);
     }
 
@@ -55,7 +48,7 @@ export function SelectFilter({ handleOnChange, id, title }) {
         <div className={`pseudo-select ${isActive ? 'active' : ''}`} id={id}>
             <span className="selected filter" onClick={onClickPseudoSelector}>{title}</span>
             <ul className="options-list">
-                {dataForFilters.modelsBodyTypes.map((option, index) => (
+                {options.map((option, index) => (
                     <li
                         key={index}
                         className="option"

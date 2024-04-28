@@ -10,7 +10,7 @@ namespace Car_Dealer.Interfaces
         /// <summary> Retrieves an auto by its ID asynchronously. </summary>
         /// <param name="id"> The ID of the auto. </param>
         /// <returns> An asynchronous operation returning AutoModel. </returns>
-        Task<AutoModel?> GetAutoByAdvId(string id);
+        Task<AutoModel?> GetAutoByAdvId(string advId);
 
         /// <summary> Creates an auto asynchronously. </summary>
         /// <param name="auto"> The auto to create. </param>

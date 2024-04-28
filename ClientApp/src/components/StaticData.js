@@ -57,12 +57,57 @@
 
     socialMediaIcons: [
         { icon: <box-icon type='logo' name='facebook' ></box-icon>, href: '/' },
-        { icon: <box-icon type = 'logo' name = 'instagram' ></box-icon>, href:'/'},
-        { icon: <box-icon name='github' type='logo' ></box-icon>, href:'https://github.com/SamoilovVlad'},
-        { icon: <box-icon name='linkedin' type='logo' ></box-icon>, href:'https://www.linkedin.com/in/vladyslav-samoilov-1211bb294/'}
+        { icon: <box-icon type='logo' name='instagram' ></box-icon>, href: '/' },
+        { icon: <box-icon name='github' type='logo' ></box-icon>, href: 'https://github.com/SamoilovVlad' },
+        { icon: <box-icon name='linkedin' type='logo' ></box-icon>, href: 'https://www.linkedin.com/in/vladyslav-samoilov-1211bb294/' }
+    ],
+
+    modelsBodyTypes: [
+        { name: 'All types', value: '' },
+        { name: 'SUV', value: 'SUV' },
+        { name: 'Saloon', value: 'Saloon' },
+        { name: 'Hatchback', value: 'Hatchback' },
+        { name: 'Convertible', value: 'Convertible' },
+        { name: 'MPV', value: 'MPV' },
+        { name: 'Coupe', value: 'Coupe' },
+        { name: 'Manual', value: 'Manual' },
+        { name: 'Panel Van', value: 'Panel Van' },
+        { name: 'Pickup', value: 'Pickup' },
+        { name: 'Camper', value: 'Camper' },
+        { name: 'Window Van', value: 'Window Van' },
+        { name: 'Chassis Cab', value: 'Chassis Cab' },
+        { name: 'Minibus', value: 'Minibus' },
+        { name: 'Tipper', value: 'Tipper' },
+        { name: 'Car Derived Van', value: 'Car Derived Van' },
+        { name: 'Limousine', value: 'Limousine' },
+        { name: 'Combi Van', value: 'Combi Van' },
+    ],
+
+    gearboxTypes: [
+        { name: 'All types', value: '' },
+        { name: 'Automatic', value: 'Automatic' },
+        { name: 'Semi-Automatic', value: 'Semi-Automatic' },
+        { name: 'Manual', value: 'Manual' }
+    ],
+
+    fuelTypes: [
+        { name: 'All types', value: '' },
+        { name: 'Petrol', value: 'Petrol' },
+        { name: 'Diesel', value: 'Diesel' },
+        { name: 'Electric', value: 'Electric' },
+        { name: 'Bi Fuel', value: 'Bi Fuel' },
+        { name: 'Diesel Plug-in Hybrid', value: 'Diesel Plug-in Hybrid' },
+        { name: 'Hybrid Diesel/Electric Plug-in', value: 'Hybrid Diesel/Electric Plug-in' },
+        { name: 'Hybrid Petrol/Electric Plug-in', value: 'Hybrid Petrol/Electric Plug-in' },
+        { name: 'Diesel Hybrid', value: 'Diesel Hybrid' },
+        { name: 'Petrol Ethanol', value: 'Petrol Ethanol' },
+        { name: 'Hybrid Petrol/Electric', value: 'Hybrid Petrol/Electric' },
+        { name: 'Hybrid Diesel/Electric', value: 'Hybrid Diesel/Electric' },
+        { name: 'Petrol Plug-in Hybrid', value: 'Petrol Plug-in Hybrid' },
+        { name: 'Petrol Hybrid', value: 'Petrol Hybrid' },
     ]
 
 
 }
 
-export const { icons, cards, popularBrands, navItems, advertisements, frequentlyQuestions, contactFormIcons, socialMediaIcons} = StaticData;
+export const { icons, cards, popularBrands, navItems, advertisements, frequentlyQuestions, contactFormIcons, socialMediaIcons, modelsBodyTypes, gearboxTypes, fuelTypes } = StaticData;

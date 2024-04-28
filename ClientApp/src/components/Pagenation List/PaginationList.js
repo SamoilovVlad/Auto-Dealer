@@ -1,26 +1,27 @@
 ﻿import './PaginationList.css';
+var index = 1000;
 
 const PaginationList = ({ currentPage, lastPage, data, onChangePage, ListItemComponent, brand = '' }) => {
-    console.log(currentPage);
 
-    const PaginationButton = ({ disabled = false, isActive = false, pageNumber, Child, classes = '' }) => (
+    const PaginationButton = ({ disabled = false, isActive = false, pageNumber, Child, classes = ''}) => (
         <button disabled={disabled} className={`pagination-btn ${isActive ? 'active' : ''} ${classes}`} onClick={() => onChangePage(pageNumber)}>
             {Child}
         </button>
     );
 
+
     const addFirstPageButton = () => {
         return (
-            <div className='first pagination-btns-list'>
-                <PaginationButton isActive={false} pageNumber={1} Child={1} />
+            <div key={'first'} className='first pagination-btns-list'>
+                <PaginationButton key={-1} isActive={false} pageNumber={1} Child={1} />
             </div>
         );
     };
 
     const addLastPageButton = (lastPage) => {
         return (
-            <div className='last pagination-btns-list'>
-                <PaginationButton isActive={false} pageNumber={lastPage} Child={lastPage} />
+            <div key={'last'} className='last pagination-btns-list'>
+                <PaginationButton key={lastPage+1} isActive={false} pageNumber={lastPage} Child={lastPage} />
             </div>
         );
     };
@@ -29,9 +30,9 @@ const PaginationList = ({ currentPage, lastPage, data, onChangePage, ListItemCom
         const buttons = [];
 
         for (let i = firstIndex; i <= lastIndex; i++) {
-            buttons.push(<PaginationButton isActive={activePage==i} pageNumber={i} Child={i} />)
+            buttons.push(<PaginationButton key={i} isActive={activePage === i} pageNumber={i} Child={i} />)
         }
-        return (<div className='pagination-btns-list'>{buttons}</div>);
+        return (<div key={index++} className='pagination-btns-list'>{buttons}</div>);
     };
 
 
@@ -39,7 +40,7 @@ const PaginationList = ({ currentPage, lastPage, data, onChangePage, ListItemCom
         return data.map((item, index) => (
             item ?
             < ListItemComponent
-                key = { index }
+                key = {index}
                 modelInfo = { item.modelInfo }
                 src = { item.img }
                 model = { item.model }
@@ -51,8 +52,8 @@ const PaginationList = ({ currentPage, lastPage, data, onChangePage, ListItemCom
     const makePagination = () => {
         const buttons = [];
 
-        const prevButton = <PaginationButton disabled={currentPage < 2} isActive={false} pageNumber={currentPage - 1} Child={<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" style={{ fill: 'white' }}><path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z"></path></svg>} classes='next-prev-btns prev' />;
-        const nextButton = <PaginationButton disabled={currentPage == lastPage} isActive={false} pageNumber={currentPage + 1} Child={<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" style={{ fill: 'white' }}><path d="M10.707 17.707 16.414 12l-5.707-5.707-1.414 1.414L13.586 12l-4.293 4.293z"></path></svg>} classes='next-prev-btns next' />;
+        const prevButton = <PaginationButton key={'prev'} disabled={currentPage < 2} isActive={false} pageNumber={currentPage - 1} Child={<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" style={{ fill: 'white' }}><path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z"></path></svg>} classes='next-prev-btns prev' />;
+        const nextButton = <PaginationButton key={'next'} disabled={currentPage === lastPage} isActive={false} pageNumber={currentPage + 1} Child={<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" style={{ fill: 'white' }}><path d="M10.707 17.707 16.414 12l-5.707-5.707-1.414 1.414L13.586 12l-4.293 4.293z"></path></svg>} classes='next-prev-btns next' />;
 
         buttons.push(prevButton);
 

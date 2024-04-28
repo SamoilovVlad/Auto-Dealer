@@ -38,11 +38,11 @@ namespace Car_Dealer.Services
         }
 
         // Method to get an auto by advertisement ID
-        public async Task<AutoModel?> GetAutoByAdvId(string id)
+        public async Task<AutoModel?> GetAutoByAdvId(string advId)
         {
             return await _DbContext
                          .Autos
-                         .FirstOrDefaultAsync(auto => auto.Adv_ID == id);
+                         .FirstOrDefaultAsync(auto => auto.Adv_ID == advId);
         }
 
         // Method to update an auto (Not implemented)

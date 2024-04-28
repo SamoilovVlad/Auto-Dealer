@@ -1,7 +1,13 @@
 ﻿const AppApi = {
-    async getAutosByMakerAndModelNames(makerName, genmodelName, page=0, pageSize=12) {
+    async getAutosByMakerAndModelNames(makerName, genmodelName, page = 0, pageSize = 12, filters) {
         try {
-            const response = await fetch(`Autos/${makerName}/Models/${genmodelName}?page=${page}&pageSize=${pageSize}`);
+            const response = await fetch(`Autos/${makerName}/Models/${genmodelName}?page=${page}&pageSize=${pageSize}` +
+                `${filters.bodyType ? "&bodyType=" + filters.bodyType : ""}` +
+                `${filters.gearboxType ? "&gearBox=" + filters.gearboxType : ""}` +
+                `${filters.fuelType ? "&fuelType=" + filters.fuelType : ""}` +
+                `${filters.minPrice ? "&minPrice=" + filters.minPrice : ""}` +
+                `${filters.maxPrice ? "&maxPrice=" + filters.maxPrice : ""}`
+            );
             const data = await response.json();
             return data;
         } catch (error) {
@@ -21,9 +27,9 @@
         }
     },
 
-    async getAutoImagesById(id) {
+    async getAutoImagesById(advId) {
         try {
-            const response = await fetch(`Autos/images/${id}`);
+            const response = await fetch(`Autos/images/${advId}`);
             const data = await response.json();
             return data;
         } catch (error) {
@@ -46,6 +52,17 @@
     async getAutoInfoByModelName(makerName, modelName) {
         try {
             const response = await fetch(`Autos/modelInfo/${makerName}/${modelName}`);
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error('Error fetching auto data by ID:', error);
+            throw error;
+        }
+    },
+
+    async getAutoInfoByAdvId(advId) {
+        try {
+            const response = await fetch(`Autos/auto/info/${advId}`);
             const data = await response.json();
             return data;
         } catch (error) {

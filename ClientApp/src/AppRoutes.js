@@ -4,6 +4,7 @@ import Layout from "./components/Layout/Layout";
 import Home from "./components/Pages/Home Page/Home";
 import Models from "./components/Pages/Models Page/Models";
 import Autos from "./components/Pages/Autos Page/Autos";
+import AutoPage from "./components/Pages/Auto Page/Auto";
 
 
 const AppRoutes = [
@@ -40,9 +41,13 @@ const AppRoutes = [
         element: <Layout><Models /></Layout>
     },
     {
-        path: `/model/:brand/:modelName/page/:pageNumber/pageSize/:pageSize`,
+        path: `/model/:brand/:modelName/page/:pageNumber/pageSize/:pageSize/:bodyType?/:gearboxType?/:fuelType?/:minPrice?/:maxPrice?`,
         element: <Layout><Autos /></Layout>
     },
+    {
+        path: `/model/:brand/:modelName/:advId`,
+        element: <Layout><AutoPage /></Layout>
+    }
 
 ];
 
