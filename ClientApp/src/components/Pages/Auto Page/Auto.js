@@ -6,6 +6,7 @@ import GoogleApi from '../../Api&Services/GoogleApi';
 import './Auto.css';
 import Slider from './slider';
 import Button from '../../Button/Button';
+import { cards } from '../../StaticData';
 
 const AutoPage = () => {
     const { brand, modelName, advId } = useParams();
@@ -95,9 +96,16 @@ const AutoPage = () => {
                                     {autoData.adv_year ? ', ' + autoData.adv_year : ' '}
                                 </p>
                                 <p className='auto-price'>{autoData.price ? 'Current price - ' + autoData.price + '$' : ''}</p>
-                                <div className='auto-btns'>
-                                    <Button>Add to cart</Button>
-                                    <Button>Buy now </Button>
+                                <div className='cards-container'>
+                                    <div className='card-home'>
+                                        <span>
+                                            <img src={cards[0].src} alt='card img' />
+                                        </span>
+                                        <span>
+                                            <span className='card-title'>Warranty</span>
+                                            Our cars come with a 5-year warranty and top-notch safety features. Enjoy peace of mind on every journey!
+                                        </span>
+                                    </div>
                                 </div>
                                 <div className='auto-icons'>
                                     <div className='auto-icon'>
@@ -134,6 +142,10 @@ const AutoPage = () => {
                                         </svg>
                                         <p>All-wheel</p>
                                     </div>
+                                </div>
+                                <div className='auto-btns'>
+                                    <Button>Add to cart</Button>
+                                    <Button>Buy now </Button>
                                 </div>
                             </div>
                         </div>

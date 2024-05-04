@@ -5,7 +5,7 @@ namespace Car_Dealer.Interfaces
     public interface IAutoService
     {
         /// <summary> Retrieves all autos asynchronously. </summary>
-        Task<List<AutoModel>> GetAllAutos();
+        IQueryable<AutoModel> GetAllAutos();
 
         /// <summary> Retrieves an auto by its ID asynchronously. </summary>
         /// <param name="id"> The ID of the auto. </param>

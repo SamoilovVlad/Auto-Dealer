@@ -3,6 +3,7 @@ import Button from '../../Button/Button';
 import { icons, cards, popularBrands, advertisements, frequentlyQuestions } from '../../StaticData';
 import ContactForm from '../../Contact Forn/ContactForm';
 import './Home.css';
+import SearchFilter from './SearchFilter/SearchFilter';
 
 const HomeIcon = ({ src, alt, children }) => {
     return (
@@ -54,8 +55,15 @@ const FAQ = ({ frequentlyQuestions }) => {
 };
 
 const Home = () => {
+    const [isSearchFilterOpen, setIsSearchFilterOpen] = useState(false);
+
+
     return (
         <>
+            <SearchFilter
+                isOpen={isSearchFilterOpen}
+                closeFunction={() => setIsSearchFilterOpen(false)}
+            />
             <section className='home'>
                 <div className='home-container'>
                     <h1>THE BEST <br /> AUTO DEALER <br /> IN THE WORLD</h1>
@@ -72,7 +80,10 @@ const Home = () => {
                         </ul>
                     </div>
                     <div className='search-btn'>
-                        <Button>Find auto by parameters</Button>
+                        <Button
+                            onClick={() => { setIsSearchFilterOpen(true) }}>
+                            Find auto by parameters
+                        </Button>
                     </div>
                 </div>
             </section>
@@ -100,7 +111,7 @@ const Home = () => {
             </section>
             <section className='contacts-container'>
                 <h2>Contacts</h2>
-                <ContactForm/>
+                <ContactForm />
             </section>
         </>
     );

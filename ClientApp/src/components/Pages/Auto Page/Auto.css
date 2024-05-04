@@ -71,7 +71,7 @@
     font-size: 22px;
     font-weight: 600;
     margin-top: 30px;
-    margin-bottom:30px;
+    margin-bottom: 30px;
 }
 
 .auto-details .button {
@@ -87,7 +87,6 @@
     align-items: center;
     flex-direction: column;
     gap: 15px;
-    margin-bottom:50px;
 }
 
     .auto-btns > :first-child {
@@ -128,46 +127,46 @@
     margin-bottom: 30px;
 }
 
-.auto-details .auto-icon{
-    display:flex;
-    gap:10px;
-    align-items:center;
-    justify-content:center;
-    font-size:18px;
+.auto-details .auto-icon {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
 }
 
-.auto-specifications{
-    display:flex;
-    flex-direction:column;
-    margin-top:50px;
-    color:var(--second-color);
-    margin-bottom:40px;
+.auto-specifications {
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+    color: var(--second-color);
+    margin-bottom: 40px;
 }
 
-    .auto-specifications h2{
-        font-weight:500;
-        font-size:28px;
-        margin-bottom:30px;
+    .auto-specifications h2 {
+        font-weight: 500;
+        font-size: 28px;
+        margin-bottom: 30px;
     }
 
-.specifications{
-    border-radius:10px;
+.specifications {
+    border-radius: 10px;
     border: 2px solid var(--second-color);
-    display:flex;
-    padding:20px;
-    flex-direction:column;
+    display: flex;
+    padding: 20px;
+    flex-direction: column;
 }
 
-.specifications .sub-title{
-    font-size:24px;
-    padding:15px 0;
-    position:relative;
-    cursor:pointer;
-}
+    .specifications .sub-title {
+        font-size: 24px;
+        padding: 15px 0;
+        position: relative;
+        cursor: pointer;
+    }
 
 .auto-specifications .sub-title:after {
     position: absolute;
-    right:15px;
+    right: 15px;
     font-size: 40px;
     transform: rotate(90deg);
     line-height: 24px;
@@ -175,52 +174,60 @@
     transition: transform 0.5s ease;
 }
 
-.specification-block > div{
-    opacity:0;
-    overflow:hidden;
-    height:0;
-    display:none;
-    transition:height 0.5s ease, opacity 0.5s ease;
+.specification-block > div {
+    opacity: 0;
+    overflow: hidden;
+    height: 0;
+    display: none;
+    transition: height 0.5s ease, opacity 0.5s ease;
 }
 
-.specification-block.open{
-    height:auto;
-}
-.specification-block.open > div {
-    display: flex;
-    opacity: 1;
+.specification-block.open {
     height: auto;
 }
-.specification-block.open .sub-title:after {
-    transform: rotate(-90deg);
-    margin-right:6px;
+
+    .specification-block.open > div {
+        display: flex;
+        opacity: 1;
+        height: auto;
+    }
+
+    .specification-block.open .sub-title:after {
+        transform: rotate(-90deg);
+        margin-right: 6px;
+    }
+
+.specification .name {
+    font-size: 16px;
 }
 
-    .specification .name {
-        font-size: 16px;
-    }
 .specification .value {
     font-size: 18px;
     font-weight: 700;
 }
 
-.specification{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    width:100%;
-    margin-bottom:10px;
+.specification {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 10px;
 }
 
 .dots {
     border-bottom: 2px dotted var(--second-color);
     margin: 0 10px -10px 10px;
     flex-grow: 2;
-    font-size:100%;
+    font-size: 100%;
 }
 
-    @media screen and (min-width:1180px) {
-        .auto-page-container {
+.auto-details .cards-container {
+    display: flex;
+    margin-bottom: 30px;
+}
+
+@media screen and (min-width:1180px) {
+    .auto-page-container {
         max-width: 1240px;
         box-sizing: content-box;
         margin: 0 auto;
@@ -244,18 +251,39 @@
     .auto-page-container h1 {
         font-size: 24px;
     }
+
+    .cards-container .card-home {
+        flex: auto;
+    }
 }
 
-@media screen and (max-width:700px){
-    .auto-page-body{
-        display:flex;
-        flex-direction:column;
+@media screen and (min-width: 612px) and (max-width:700px) {
+    .slider {
+        max-width: 500px;
+        margin: 0 auto;
     }
-    .slider{
-        max-width:500px;
+
+    .splide__arrow.splide__arrow--next {
+        right: -50px;
     }
-    .auto-details{
-        margin:0;
-        margin-top:50px;
+
+    .splide__arrow.splide__arrow--prev {
+        left: -50px;
+    }
+}
+
+@media screen and (max-width:700px) {
+    .auto-page-body {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .slider {
+        max-width: 500px;
+    }
+
+    .auto-details {
+        margin: 0;
+        margin-top: 50px;
     }
 }

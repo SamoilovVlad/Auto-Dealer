@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http.Metadata;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Car_Dealer.Controllers
 {
@@ -19,7 +20,7 @@ namespace Car_Dealer.Controllers
         }
 
         [HttpGet("auto/info/{advId}")]
-        public async Task<IActionResult> GetAuto( string advId)
+        public async Task<IActionResult> GetAuto(string advId)
         {
             AutoModel? auto = await _autoDatabaseService.GetAutoByAdvId(advId);
             return auto == null ? NotFound() : Ok(auto);
@@ -48,7 +49,7 @@ namespace Car_Dealer.Controllers
         }
 
         [HttpGet("{makerName}/Models/{genModel}")]
-        public async Task<IActionResult> GetAllAutosByMakerAndModelNames(string makerName, string genModel, int page=0, int pageSize=12, string bodyType="", string gearBox="", string fuelType="", int minPrice=0, int maxPrice=int.MaxValue)
+        public async Task<IActionResult> GetAllAutosByMakerAndModelNames(string makerName, string genModel, int page = 0, int pageSize = 12, string bodyType = "", string gearBox = "", string fuelType = "", int minPrice = 0, int maxPrice = int.MaxValue)
         {
             IQueryable<AutoModel?> modelsQuery = await _autoDatabaseService.GetAllAutosByGenModelAsync(makerName, genModel);
 
@@ -114,6 +115,38 @@ namespace Car_Dealer.Controllers
             }
             return image == null ? BadRequest("image == null") : Ok(image);
         }
+
+        [HttpPost("filters/apply")]
+        public async Task<IActionResult> FitersApply([FromBody] FilterOptions filterOptions)
+        {
+            IQueryable<AutoModel> autosQuery = _autoDatabaseService.GetAllAutos();
+            autosQuery = autosQuery.FilterByBrand(filterOptions.Brand)
+                                   .FilterByModel(filterOptions.Model)
+                                   .FilterByBodyType(filterOptions.BodyType)
+                                   .FilterByColor(filterOptions.Color)
+                                   .FilterByGearboxType(filterOptions.GearboxType)
+                                   .FilterByFuelType(filterOptions.FuelType)
+                                   .FilterByPriceRange(filterOptions.PriceFrom, filterOptions.PriceTo)
+                                   .FilterByMilesRange(filterOptions.MilesFrom, filterOptions.MilesTo);
+            int a = autosQuery.Count();
+            return Ok(autosQuery.Count());
+        }
+
+        [HttpGet("filteredAutos")]
+        public async Task<IActionResult> GetFilteredAutos([FromQuery] FilterOptions filterOptions)
+        {
+            IQueryable<AutoModel> autosQuery = _autoDatabaseService.GetAllAutos();
+            autosQuery = autosQuery.FilterByBrand(filterOptions.Brand)
+                                   .FilterByModel(filterOptions.Model)
+                                   .FilterByBodyType(filterOptions.BodyType)
+                                   .FilterByColor(filterOptions.Color)
+                                   .FilterByGearboxType(filterOptions.GearboxType)
+                                   .FilterByFuelType(filterOptions.FuelType)
+                                   .FilterByPriceRange(filterOptions.PriceFrom, filterOptions.PriceTo)
+                                   .FilterByMilesRange(filterOptions.MilesFrom, filterOptions.MilesTo);
+            return Ok(await autosQuery.ToListAsync());
+        }
+
 
     }
 }

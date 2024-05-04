@@ -32,10 +32,12 @@ namespace Car_Dealer.Services
         }
 
         // Method to get all autos (Not implemented)
-        public Task<List<AutoModel>> GetAllAutos()
+        public IQueryable<AutoModel> GetAllAutos()
         {
-            throw new NotImplementedException();
+            // Повертає запит IQueryable<AutoModel> з бази даних
+            return _DbContext.Autos.AsQueryable();
         }
+
 
         // Method to get an auto by advertisement ID
         public async Task<AutoModel?> GetAutoByAdvId(string advId)
@@ -56,7 +58,7 @@ namespace Car_Dealer.Services
         {
             IQueryable<AutoModel?> autosQuery = _DbContext
                                         .Autos
-                                        .Where(auto => auto.Maker == makerName);
+                                        .FilterByBrand(makerName);
             return await Task.FromResult(autosQuery);
         }
 
@@ -76,7 +78,7 @@ namespace Car_Dealer.Services
         {
             List<string?> models = await _DbContext
                                             .Autos
-                                            .Where(auto => auto.Maker == makerName)
+                                            .FilterByBrand(makerName)
                                             .Select(auto => auto.Genmodel)
                                             .Distinct()
                                             .ToListAsync();
@@ -87,7 +89,7 @@ namespace Car_Dealer.Services
         public async Task<IQueryable<AutoModel?>> GetAllAutosByGenModelAsync(string makerName, string genModel)
         {
             IQueryable<AutoModel?> autosQuery = await GetAutosByMakerNameAsync(makerName);
-            autosQuery = autosQuery.Where(auto => auto.Genmodel == genModel);
+            autosQuery = autosQuery.FilterByModel(genModel);
             return autosQuery;
         }
 

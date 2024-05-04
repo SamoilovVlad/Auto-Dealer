@@ -5,6 +5,7 @@ import Home from "./components/Pages/Home Page/Home";
 import Models from "./components/Pages/Models Page/Models";
 import Autos from "./components/Pages/Autos Page/Autos";
 import AutoPage from "./components/Pages/Auto Page/Auto";
+import FilteredAutosPage from "./components/Pages/Filtered Autos Page/FilteredAutosPage";
 
 
 const AppRoutes = [
@@ -47,6 +48,10 @@ const AppRoutes = [
     {
         path: `/model/:brand/:modelName/:advId`,
         element: <Layout><AutoPage /></Layout>
+    },
+    {
+        path: `/filteredAutos`,
+        element:<Layout><FilteredAutosPage/></Layout>
     }
 
 ];
