@@ -11,4 +11,6 @@ public class FilterOptions
     public string Model { get; set; }
     public string BodyType { get; set; }
     public string Color { get; set; }
+    public int page { get; set; }
+    public int autoPerPage { get; set; }
 }

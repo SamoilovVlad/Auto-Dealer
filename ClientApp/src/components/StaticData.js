@@ -108,6 +108,7 @@
     ],
 
     makers: [
+        'All brands',
         'Abarth',
         'Alfa Romeo',
         'Aston Martin',
@@ -198,7 +199,7 @@
         'Zenos'
     ],
 
-    colors:['Purple', 'Silver', 'Green', 'Pink', 'Turquoise', 'Navy', 'Multicolour', 'Grey', 'Red', 'Bronze', 'Brown', 'Maroon', 'Gold', 'Beige', 'Magenta', 'Indigo', 'Burgundy', 'Black', 'Blue', 'Yellow', 'White', 'Orange'],
+    colors:['All colors', 'Purple', 'Silver', 'Green', 'Pink', 'Turquoise', 'Navy', 'Multicolour', 'Grey', 'Red', 'Bronze', 'Brown', 'Maroon', 'Gold', 'Beige', 'Magenta', 'Indigo', 'Burgundy', 'Black', 'Blue', 'Yellow', 'White', 'Orange'],
 
 
 

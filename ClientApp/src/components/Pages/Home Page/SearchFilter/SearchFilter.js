@@ -64,8 +64,9 @@ const SearchFilter = ({ isOpen, closeFunction, initialFilters = {} }) => {
         bodyType: initialFilters.bodyType || '',
         color: initialFilters.color || '',
     });
-    console.log(filtersValue);
+
     const [filteredAutosCount, setFilteredAutosCount] = useState(null);
+    const [isClearBtnActive, setIsClearBtnActive] = useState(false);
 
     const [state, dispatch] = useReducer(reducer, {
         brand: { isOpen: false, selectedOption: initialFilters.brand || null },
@@ -80,22 +81,71 @@ const SearchFilter = ({ isOpen, closeFunction, initialFilters = {} }) => {
 
     const handleSelectOption = (dropdownType, option) => {
         dispatch({ type: 'SELECT_OPTION', dropdownType, option });
+    };
+
+    //useEffect after selected option in dropdown filters was chenged
+    useEffect(() => {
         setFiltersValue((prevValue) => ({
             ...prevValue,
-            [dropdownType]: option,
+            brand: state.brand.selectedOption,
+            model: state.model.selectedOption,
+            bodyType: state.bodyType.selectedOption,
+            color: state.color.selectedOption,
         }));
-    };
+    }, [state.brand.selectedOption, state.model.selectedOption, state.bodyType.selectedOption, state.color.selectedOption]);
+
+    const clearFilters = () => {
+        handleSelectOption('brand', 'All brands');
+        handleSelectOption('model', 'All models');
+        handleSelectOption('bodyType', 'All types');
+        handleSelectOption('color', 'All colors');
+        setFiltersValue((prevValue) => ({
+            ...prevValue,
+            priceTo: null,
+            priceFrom: null,
+            milesFrom: null,
+            milesTo: null,
+            fuelType: [],
+            gearboxType: [],
+            brand: '',
+            model: '',
+            bodyType: '',
+            color: '',
+
+        }));
+    }
+
 
     //Getting all modelNames when brand was choosen
     useEffect(() => {
         const fetchData = async () => {
             if (state.brand.selectedOption) {
-                const data = await AppApi.getAutoModelsByMakerName(state.brand.selectedOption);
+                var data = await AppApi.getAutoModelsByMakerName(state.brand.selectedOption);
+                data.unshift('All models');
                 dispatch({ type: 'SET_MODEL_OPTIONS', options: data });
             }
         };
         fetchData();
     }, [state.brand.selectedOption]);
+
+    function hasNonEmptyValues(filters) {
+        for (let key in filters) {
+            const value = filters[key];
+            if (
+                value !== null &&
+                value !== undefined &&
+                !(Array.isArray(value) && value.length === 0) &&
+                !(typeof value === 'string' && value.trim() === '')
+            ) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    const checkIsClearBtnActive = () => {
+        setIsClearBtnActive(hasNonEmptyValues(filtersValue));
+    }
 
     // Handle changes for price filter
     const handlePriceFromChange = (event) => {
@@ -173,10 +223,15 @@ const SearchFilter = ({ isOpen, closeFunction, initialFilters = {} }) => {
         };
         if (filtersValue) {
             applyFilters();
+            checkIsClearBtnActive();
         }
     }, [filtersValue]);
 
     const searchByFilters = async () => {
+        filtersValue.brand = filtersValue.brand === 'All brands' ? null : filtersValue.brand;
+        filtersValue.model = filtersValue.model === 'All models' ? null : filtersValue.model;
+        filtersValue.bodyType = filtersValue.bodyType === 'All types' ? null : filtersValue.bodyType;
+        filtersValue.color = filtersValue.color === 'All colors' ? null : filtersValue.color;
         const response = await fetch('/Autos/filters/apply', {
             method: 'POST',
             headers: {
@@ -193,42 +248,11 @@ const SearchFilter = ({ isOpen, closeFunction, initialFilters = {} }) => {
         }
     };
 
-    const FilteredAutosPage = async () => {
-        const params = new URLSearchParams();
-
-        for (const key in filtersValue) {
-            const value = filtersValue[key];
-
-            if (Array.isArray(value)) {
-                value.forEach(element => params.append(key, element));
-            } else if (value !== null && value !== undefined && !isNaN(value)) {
-                params.append(key, value);
-            }
-        }
-        const queryString = params.toString();
-        const url = `/Autos/filteredAutos?${queryString}`;
-
-        const response = await fetch(url, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
-
-        if (response.ok) {
-            const result = await response.json();
-            console.log(result);
-        } else {
-            console.error('Failed to apply filters');
-        }
-    };
-
-
-
     return (
         <div className={`search-filter-view ${isOpen ? 'open' : ''}`}>
             <div className='search-filter-view-header'>
                 <span className='search-filter-view-title'>Filters</span>
+                <div onClick={clearFilters} className={`clear-filters-btn ${isClearBtnActive?'active':''}`}>Clear filters</div>
                 <div className='close-search-filter-view-btn' onClick={closeFunction}></div>
             </div>
             <div className='search-filters-container'>
@@ -330,7 +354,7 @@ const SearchFilter = ({ isOpen, closeFunction, initialFilters = {} }) => {
             </div>
             <div className='filter-view-bottom'>
                 <span className='filter-count'>Found <span style={{ fontSize: '20px', fontWeight: '700' }}>{filteredAutosCount}</span> autos</span>
-                <a className='filter-btn' href={`/filteredAutos?${new URLSearchParams(filtersValue).toString()}`}>Apply filters</a>
+                <a className='filter-btn' href={`/filteredAutos?${new URLSearchParams(filtersValue).toString()}&page=1&autoPerPage=12`}>Apply filters</a>
             </div>
         </div>
     );

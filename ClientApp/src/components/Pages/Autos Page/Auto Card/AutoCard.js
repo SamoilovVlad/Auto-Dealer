@@ -1,6 +1,8 @@
 ﻿import './AutoCard.css';
 
 const AutoCard = ({ modelInfo, src, model, brand}) => {
+    brand = brand ? brand : modelInfo.maker;
+
     return (
         <a className="wrapper" href={`/model/${brand}/${model}/${modelInfo.adv_ID}`}>
             <div className="container">

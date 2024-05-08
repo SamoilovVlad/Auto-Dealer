@@ -72,9 +72,9 @@ export function FilterFromTo({ onChangeFromInput, onChangeToInput, valueFrom, va
 
     return (
         <div className='filter-from-to-container'>
-            <input className='filter-from-to' placeholder='from' onFocus={handleFocus} onBlur={(event) => { event.target.placeholder = 'from' }} onChange={onChangeFromInput} value={valueFrom}></input>
+            <input className='filter-from-to' placeholder='from' onFocus={handleFocus} onBlur={(event) => { event.target.placeholder = 'from' }} onChange={onChangeFromInput} value={valueFrom?valueFrom:''}></input>
             <span style={{ fontSize: '32px' }}>-</span>
-            <input className='filter-from-to' placeholder='to' onFocus={handleFocus} onBlur={(event) => { event.target.placeholder = 'to' }} onChange={onChangeToInput} value={valueTo}></input>
+            <input className='filter-from-to' placeholder='to' onFocus={handleFocus} onBlur={(event) => { event.target.placeholder = 'to' }} onChange={onChangeToInput} value={valueTo?valueTo:''}></input>
         </div>
     );
 }

@@ -1,13 +1,13 @@
 ﻿.search-filter-view {
     overflow-x: hidden;
     overflow-y:scroll;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     height: 100%;
     width: 0px;
     background-color: var(--first-color);
-    z-index: 2;
+    z-index: 1100;
     color: var(--second-color);
     opacity: 0;
     border-top: 2px solid var(--second-color);
@@ -26,6 +26,26 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position:relative;
+}
+
+.search-filter-view.open .clear-filters-btn{
+    padding:10px 15px;
+    text-align:center;
+    position:absolute;
+    right:45px;
+    background-color:gray;
+    display:flex;
+    cursor:pointer;
+    border-radius:15px;
+    height:40px;
+}
+
+.clear-filters-btn.active{
+    background-color:var(--third-color) !important;
+}
+.search-filter-view .clear-filters-btn{
+    display:none;
 }
 
 .close-search-filter-view-btn {

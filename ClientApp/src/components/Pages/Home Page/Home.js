@@ -56,13 +56,21 @@ const FAQ = ({ frequentlyQuestions }) => {
 
 const Home = () => {
     const [isSearchFilterOpen, setIsSearchFilterOpen] = useState(false);
+    const openFilters = () => {
+        setIsSearchFilterOpen(true);
+        document.body.classList.add('scroll-off');
+    }
 
+    const closeFilters = () => {
+        setIsSearchFilterOpen(false);
+        document.body.classList.remove('scroll-off');
+    }
 
     return (
         <>
             <SearchFilter
                 isOpen={isSearchFilterOpen}
-                closeFunction={() => setIsSearchFilterOpen(false)}
+                closeFunction={closeFilters}
             />
             <section className='home'>
                 <div className='home-container'>
@@ -81,7 +89,7 @@ const Home = () => {
                     </div>
                     <div className='search-btn'>
                         <Button
-                            onClick={() => { setIsSearchFilterOpen(true) }}>
+                            onClick={openFilters}>
                             Find auto by parameters
                         </Button>
                     </div>

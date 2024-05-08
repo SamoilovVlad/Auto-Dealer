@@ -121,19 +121,20 @@ namespace Car_Dealer.Controllers
         {
             IQueryable<AutoModel> autosQuery = _autoDatabaseService.GetAllAutos();
             autosQuery = autosQuery.FilterByBrand(filterOptions.Brand)
-                                   .FilterByModel(filterOptions.Model)
-                                   .FilterByBodyType(filterOptions.BodyType)
+                                   .FilterByModel(filterOptions.Model);
+                                   int a = autosQuery.Count();
+                                   autosQuery=autosQuery.FilterByBodyType(filterOptions.BodyType)
                                    .FilterByColor(filterOptions.Color)
                                    .FilterByGearboxType(filterOptions.GearboxType)
                                    .FilterByFuelType(filterOptions.FuelType)
                                    .FilterByPriceRange(filterOptions.PriceFrom, filterOptions.PriceTo)
                                    .FilterByMilesRange(filterOptions.MilesFrom, filterOptions.MilesTo);
-            int a = autosQuery.Count();
+            a = autosQuery.Count();
             return Ok(autosQuery.Count());
         }
 
-        [HttpGet("filteredAutos")]
-        public async Task<IActionResult> GetFilteredAutos([FromQuery] FilterOptions filterOptions)
+        [HttpPost("filteredAutos")]
+        public async Task<IActionResult> GetFilteredAutos([FromBody] FilterOptions filterOptions)
         {
             IQueryable<AutoModel> autosQuery = _autoDatabaseService.GetAllAutos();
             autosQuery = autosQuery.FilterByBrand(filterOptions.Brand)
@@ -144,7 +145,7 @@ namespace Car_Dealer.Controllers
                                    .FilterByFuelType(filterOptions.FuelType)
                                    .FilterByPriceRange(filterOptions.PriceFrom, filterOptions.PriceTo)
                                    .FilterByMilesRange(filterOptions.MilesFrom, filterOptions.MilesTo);
-            return Ok(await autosQuery.ToListAsync());
+            return Ok( new {autos = await autosQuery.Skip(--filterOptions.page * filterOptions.autoPerPage).Take(filterOptions.autoPerPage).ToListAsync(), totalCount=autosQuery.Count() });
         }
 
 
