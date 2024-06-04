@@ -60,7 +60,7 @@
         min-width: 200px;
         padding: 10px 40px 10px 0;
         line-height: 18px;
-        background: #212226 url(data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3.5 6L8 10.5L12.5 6' stroke='white' stroke-width='2'/%3E%3C/svg%3E%0A) calc(100% - 20px) 50% no-repeat;
+        background: #212226 url(''data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3.5 6L8 10.5L12.5 6' stroke='white' stroke-width='2'/%3E%3C/svg%3E%0A) calc(100% - 20px) 50% no-repeat;
         border-color: white !important;
     }
 
@@ -79,7 +79,7 @@
         height: 0;
         overflow: hidden;
         z-index: -1;
-        transition: all 0.5s ease;
+        transition: all 0.3s ease;
         max-height: 300px;
         overflow-y: auto;
     }
@@ -87,6 +87,10 @@
     .pseudo-select.active .options-list {
         height: auto;
         z-index: 1001;
+    }
+
+    .pseudo-select.active .dropdown-icon{
+        transform: rotate(180deg);
     }
 
     .pseudo-select.active .selected {

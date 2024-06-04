@@ -7,6 +7,7 @@ import PaginationList from '../../Pagenation List/PaginationList';
 import AutoCard from './Auto Card/AutoCard';
 import { InputFilter, SelectFilter } from '../../Filters/Filters';
 import { modelsBodyTypes, gearboxTypes, fuelTypes } from '../../StaticData';
+import { useCart } from '../../Layout/Cart/CartContext';
 import './Autos.css'
 
 const Autos = () => {
@@ -21,6 +22,12 @@ const Autos = () => {
         minPrice: minPrice,
         maxPrice: maxPrice
     });
+    const { cartItems } = useCart();
+    console.log(cartItems);
+
+    useEffect(() => {
+        console.log(cartItems);
+    }, [cartItems]);
 
     useEffect(() => {
         setIsLoading(true);
@@ -36,7 +43,7 @@ const Autos = () => {
                         var res;
                         //If we can`t find image with good view, we take first existing image of this car.
                         imageModel ? res = await GoogleApi.searchFileByName(imageModel.image_name) : res = await GoogleApi.searchFileByName(imageModels[0].image_name);
-                        const img = await GoogleApi.fetchDriveData(res.id);
+                        const img = await GoogleApi.getImageSrc(res.id);
 
                         return img && modelInfo ? { modelInfo, img, model: modelName } : null;
 
@@ -135,6 +142,7 @@ const Autos = () => {
                         data={autosData}
                         onChangePage={loadPage}
                         ListItemComponent={AutoCard}
+                        cartList={cartItems || []}
                     />
                 </section>
                 )}

@@ -2,7 +2,7 @@
     navItems: [
         { href: '/', label: 'Home' },
         { href: '/models', label: 'Models' },
-        { href: '/services', label: 'Services' },
+        { href: 'http://localhost/AutoSeller/', label: 'Services' },
         { href: '/contacts', label: 'Contacts' },
         { href: '/about', label: 'About' },
     ],

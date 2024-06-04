@@ -19,6 +19,7 @@
     z-index: 2;
     display: block;
     position: relative;
+    width:100%;
 }
 
 .sticky-before.active + .header{
@@ -35,6 +36,7 @@
 .header-inner {
     display: flex;
     padding: 0 10%;
+    justify-content:space-between;
 }
 
 .logo {
@@ -142,6 +144,21 @@
 }
 
 @media screen and (max-width: 982px){
+    .cart-btn.mini-cart p{
+        display:none;
+    }
+    .cart-btn.mini-cart{
+        margin-right:55px;
+        width:60px;
+    }
+    .cart-btn.mini-cart svg{
+        margin:0 !important;
+        width:100% !important;
+        height:65% !important;
+        position:absolute;
+        left:-25%;
+    }
+
     .header-inner {
         padding: 0 15px;
         background-color: var(--first-color);
@@ -155,7 +172,9 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-left: auto;
+        position:absolute;
+        right:15px;
+        top:20px;
         cursor:pointer;
     }
 
@@ -224,7 +243,7 @@
         position: fixed;
         background: var(--first-color);
         z-index: 11;
-        top: 60px;
+        top: 80px;
         bottom: 0;
         left: 0;
         right: 0;

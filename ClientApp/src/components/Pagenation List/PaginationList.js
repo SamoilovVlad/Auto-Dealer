@@ -1,8 +1,7 @@
 ﻿import './PaginationList.css';
 var index = 1000;
 
-const PaginationList = ({ currentPage, lastPage, data, onChangePage, ListItemComponent, brand = '' }) => {
-
+const PaginationList = ({ currentPage, lastPage, data, onChangePage, ListItemComponent, brand = '', cartList}) => {
     const PaginationButton = ({ disabled = false, isActive = false, pageNumber, Child, classes = ''}) => (
         <button disabled={disabled} className={`pagination-btn ${isActive ? 'active' : ''} ${classes}`} onClick={() => onChangePage(pageNumber)}>
             {Child}
@@ -34,17 +33,16 @@ const PaginationList = ({ currentPage, lastPage, data, onChangePage, ListItemCom
         }
         return (<div key={index++} className='pagination-btns-list'>{buttons}</div>);
     };
-
-
     const makeListWithItemComponents = () => {
         return data.map((item, index) => (
             item ?
             < ListItemComponent
-                key = {index}
-                modelInfo = { item.modelInfo }
-                src = { item.img }
-                model = { item.model }
-                brand = { brand }
+                    key={index}
+                    modelInfo={item.modelInfo}
+                    src={item.img}
+                    model={item.model}
+                    brand={brand}
+                    isInCart={cartList && cartList.find(auto => auto.adv_ID === item.modelInfo.adv_ID) ? true : false}
             /> : null
         ));
     };

@@ -5,7 +5,7 @@ import GoogleApi from '../../Api&Services/GoogleApi';
 import PaginationList from '../../Pagenation List/PaginationList';
 import AutoCard from '../Autos Page/Auto Card/AutoCard';
 import SearchFilter from '../Home Page/SearchFilter/SearchFilter';
-
+import { useCart } from '../../Layout/Cart/CartContext';
 import './FilteredAutosPage.css';
 import Loader from '../../Loader/Loader';
 
@@ -37,7 +37,7 @@ const processModelInfo = async (modelInfo, ImgPredictedViewPoint) => {
             ? await GoogleApi.searchFileByName(imageModel.image_name)
             : await GoogleApi.searchFileByName(imageModels[0].image_name);
 
-        const img = await GoogleApi.fetchDriveData(res.id);
+        const img = await GoogleApi.getImageSrc(res.id);
 
         return img && modelInfo ? { modelInfo, img, model: modelInfo.genmodel } : null;
     } catch (error) {
@@ -55,6 +55,7 @@ const FilteredAutosPage = () => {
     const [currentPage, setCurrentPage] = useState(null);
     const [autoPerPage, setAutoPerPage] = useState(null);
     const [isFilterOpen, setIsFilterOpen] = useState(true);
+    const { cartItems } = useCart();
 
     const parseIntParam = (param) => {
         const value = parseInt(param);
@@ -114,7 +115,7 @@ const FilteredAutosPage = () => {
                 <h1 className='filtered-autos-container-title'>Customize Your Search</h1>
                 {filtersValue ? <SearchFilter initialFilters={filtersValue} isOpen={isFilterOpen} closeFunction={() => { setIsFilterOpen(!isFilterOpen) }} /> : null}
                 <h2 className='sub-title'>Find Your Perfect Car</h2>
-                {autosData && totalAutoCount ? <PaginationList currentPage={currentPage} lastPage={(Math.ceil(totalAutoCount / autoPerPage)).toFixed(0)} data={autosData} onChangePage={getPage} ListItemComponent={AutoCard} /> : null}
+                {autosData && totalAutoCount ? <PaginationList currentPage={currentPage} lastPage={(Math.ceil(totalAutoCount / autoPerPage)).toFixed(0)} data={autosData} onChangePage={getPage} ListItemComponent={AutoCard} cartList={cartItems} /> : null}
             </section>
     );
 };

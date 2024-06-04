@@ -92,7 +92,7 @@ namespace Car_Dealer.Controllers
         public async Task<IActionResult> GetAutoImageNames(string advId)
         {
             IQueryable<AutoImageModel> imageQuery = await _autoDatabaseService.GetAutoImagesByAdvIdAsync(advId);
-            List<AutoImageModel> autoImageModels = await imageQuery.ToListAsync();
+            List<AutoImageModel> autoImageModels = imageQuery.ToList();
             return autoImageModels.Count > 0 ? Ok(autoImageModels) : BadRequest();
         }
 
@@ -110,8 +110,9 @@ namespace Car_Dealer.Controllers
                                       .FirstOrDefaultAsync();
 
                 IQueryable<AutoImageModel> imagesQuery = await _autoDatabaseService.GetAutoImagesByAdvIdAsync(advId);
-                image = await imagesQuery.FirstOrDefaultAsync(img => img.Predicted_viewpoint <= 90);
-                numOfSkippedAuto++;
+                if (imagesQuery.Count() == 0) break;
+                    image = await imagesQuery.FirstOrDefaultAsync(img => img.Predicted_viewpoint <= 90);
+                    numOfSkippedAuto++;
             }
             return image == null ? BadRequest("image == null") : Ok(image);
         }

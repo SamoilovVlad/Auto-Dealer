@@ -41,7 +41,6 @@ const Slider = ({ images }) => {
             mainSplideRef.sync(thumbnailsSplideRef);
         }
     };
-
     return (
         <div className='slider'>
             <Splide
@@ -54,7 +53,7 @@ const Slider = ({ images }) => {
                     <SplideSlide key={index}>
                         <img
                             className='auto-slider-img'
-                            src={URL.createObjectURL(img)}
+                            src={img.src}
                             alt=''
                         />
                     </SplideSlide>
@@ -70,7 +69,7 @@ const Slider = ({ images }) => {
                 {images.map((img, index) => (
                     <SplideSlide key={index}>
                         <img className='auto-slider-img'
-                            src={URL.createObjectURL(img)}
+                            src={img.src}
                             alt=''
                         />
                     </SplideSlide>

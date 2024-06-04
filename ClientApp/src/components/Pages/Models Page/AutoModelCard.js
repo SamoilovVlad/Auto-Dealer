@@ -1,10 +1,10 @@
 ﻿const AutoModelCard = ({brand, model, src, modelInfo}) => {
-    if(src!==undefined)
+    if (src !== undefined)
     return (
         <div className='model'>
             <a href={`/model/${brand}/${model}/page/1/pageSize/12`}>
                 <div className='auto-image-container'>
-                   <img className='auto-image' src={URL.createObjectURL(src)} alt='car' />
+                   <img className='auto-image' src={src} alt='car' />
                 </div>
                 <div className='model-info'>
                     <p className='title'>{model}</p>

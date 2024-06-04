@@ -35,7 +35,7 @@ const Models = () => {
                     const modelInfo = await AppApi.getAutoInfoByModelName(brand, model);
                     const imgPath = await AppApi.getAutoImageByGenmodelName(brand, model);
                     const res = await GoogleApi.searchFileByName(imgPath.image_name);
-                    const img = await GoogleApi.fetchDriveData(res.id);
+                    const img = await GoogleApi.getImageSrc(res.id);
                     return { model, modelInfo, img };
 
                 } catch {

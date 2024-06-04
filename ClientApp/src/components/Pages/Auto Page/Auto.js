@@ -7,12 +7,16 @@ import './Auto.css';
 import Slider from './slider';
 import Button from '../../Button/Button';
 import { cards } from '../../StaticData';
+import CookiesManagement from '../../Api&Services/CookiesManagement';
+import { useCart } from '../../Layout/Cart/CartContext';
 
 const AutoPage = () => {
     const { brand, modelName, advId } = useParams();
     const [autoData, setAutoData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [imgData, setImgData] = useState(null);
+    const [isAutoInCart, setIsAutoInCart] = useState(CookiesManagement.checkIsAutoInCookies(advId));
+    const { cartItems, addToCart, deleteFromCart } = useCart();
 
     const fetchAutoData = async () => {
         try {
@@ -24,7 +28,7 @@ const AutoPage = () => {
             const imagesPromises = imagePaths.map(async (imgPath) => {
                 const imgSearchResult = await GoogleApi.searchFileByName(imgPath.image_name);
                 if (imgSearchResult && imgSearchResult.id) {
-                    return await GoogleApi.fetchDriveData(imgSearchResult.id);
+                    return await { src: await GoogleApi.getImageSrc(imgSearchResult.id)};
                 }
                 return null;
             });
@@ -68,7 +72,6 @@ const AutoPage = () => {
         </div>
     );
 
-
     return (
         <>
             {
@@ -88,7 +91,7 @@ const AutoPage = () => {
                         </div>
                         <h1>{brand} {modelName}</h1>
                         <div className='auto-page-body'>
-                            {imgData && <Slider images={imgData} />}
+                                {imgData && <Slider images={imgData} />}
                             <div className='auto-details'>
                                 <h2 className='auto-title'>{brand} {modelName}</h2>
                                 <p className='auto-sub-title'> {autoData.engin_size ? 'Engine: ' + autoData.engin_size : ' '}
@@ -143,10 +146,19 @@ const AutoPage = () => {
                                         <p>All-wheel</p>
                                     </div>
                                 </div>
-                                <div className='auto-btns'>
-                                    <Button>Add to cart</Button>
-                                    <Button>Buy now </Button>
-                                </div>
+                                    <div className='auto-btns'>
+                                        <Button onClick={cartItems.find(item => item.adv_ID === advId) ? () => {
+                                            deleteFromCart(advId);
+                                            setIsAutoInCart(!isAutoInCart);
+                                        } : () => {
+                                            addToCart(autoData, imgData[0].src);
+                                            setIsAutoInCart(!isAutoInCart);
+                                        }}>
+                                            {cartItems.find(item => item.adv_ID === advId) ? 'Delete from cart' : 'Add to cart'}
+                                        </Button>
+                                        <Button>Buy now</Button>
+                                    </div>
+
                             </div>
                         </div>
                         <div className='auto-specifications'>

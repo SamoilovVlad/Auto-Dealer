@@ -1,4 +1,6 @@
-﻿import './Container.css';
+﻿import { CartProvider } from '../Cart/CartContext';
+import './Container.css';
+
 
 const Container = ({ children }) => {
 
